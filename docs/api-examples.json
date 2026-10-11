@@ -1,0 +1,98 @@
+{
+  "synthetic": true,
+  "project_response": {
+    "name": "合成示例项目",
+    "project_id": "project_01039155e01846a1ad02adf7abd8cec7"
+  },
+  "document_response": {
+    "document_id": "doc_aed263f8e145429ba48b4fc7ccb51f6a",
+    "project_id": "project_01039155e01846a1ad02adf7abd8cec7",
+    "bidder_id": null,
+    "role": "profile",
+    "status": "ready",
+    "document_hash": "01bbfb052f77386f4a0f424561f23232c5b44153f5496b231346805a00d1e234",
+    "diagnostics": [],
+    "format": ".md",
+    "parser": "md",
+    "chunk_count": 1
+  },
+  "chunks_response": {
+    "items": [
+      {
+        "document_id": "doc_aed263f8e145429ba48b4fc7ccb51f6a",
+        "chunk_id": "doc_aed263f8e145429ba48b4fc7ccb51f6a_1",
+        "text": "示例企业持有施工资质",
+        "document_hash": "01bbfb052f77386f4a0f424561f23232c5b44153f5496b231346805a00d1e234",
+        "page": null,
+        "sheet": null,
+        "row_start": null,
+        "row_end": null,
+        "column_start": null,
+        "column_end": null,
+        "quality": "good"
+      }
+    ],
+    "next_cursor": null
+  },
+  "run_request": {
+    "type": "opportunity_discovery",
+    "project_id": "project_01039155e01846a1ad02adf7abd8cec7",
+    "document_ids": [
+      "doc_aed263f8e145429ba48b4fc7ccb51f6a"
+    ],
+    "options": {
+      "regions": [
+        "江苏"
+      ],
+      "min_budget": "1000000",
+      "max_candidates": 5
+    }
+  },
+  "run_response": {
+    "run_id": "run_3c40870c8b6740ad913692044b23d331",
+    "type": "opportunity_discovery",
+    "project_id": "project_01039155e01846a1ad02adf7abd8cec7",
+    "status": "pending",
+    "current_step": null,
+    "completed_steps": [],
+    "known_steps": [
+      "ingest",
+      "profile",
+      "search",
+      "assess",
+      "report"
+    ],
+    "cancel_requested": false,
+    "review_count": 0,
+    "revision": 1,
+    "result_stale": false,
+    "error": null,
+    "created_at": "2026-10-03T12:28:06.538081Z",
+    "updated_at": "2026-10-03T12:28:06.538081Z"
+  },
+  "validation_error": {
+    "error": {
+      "code": "validation_error",
+      "message": "字段校验失败",
+      "details": {
+        "fields": [
+          {
+            "path": [
+              "header",
+              "Idempotency-Key"
+            ],
+            "type": "missing"
+          }
+        ]
+      },
+      "request_id": "0ee0e169b50347aa9d71aece3f63028d"
+    }
+  },
+  "review_request": {
+    "decision": "confirm",
+    "target_id": "profile",
+    "patch": {},
+    "reason": "已核对原文",
+    "expected_version": 4
+  }
+}

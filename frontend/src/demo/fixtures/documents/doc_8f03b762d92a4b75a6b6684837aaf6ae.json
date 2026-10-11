@@ -1,0 +1,42 @@
+{
+  "document": {
+    "document_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae",
+    "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+    "bidder_id": null,
+    "role": "tender",
+    "status": "ready",
+    "document_hash": "517f856cbfa60f2abe2945cfd12ec307d24a40b0fe63bc390087b66be9957a35",
+    "diagnostics": [],
+    "format": ".md",
+    "parser": "md",
+    "chunk_count": 1
+  },
+  "chunks": [
+    {
+      "document_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae",
+      "chunk_id": "chunk_232bed4c8fa9a813ed419d4f4bbf96df03ef7fdf3aad85b7",
+      "text": "施工资质；技术满分10",
+      "document_hash": "517f856cbfa60f2abe2945cfd12ec307d24a40b0fe63bc390087b66be9957a35",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    },
+    {
+      "document_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae",
+      "chunk_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae_1",
+      "text": "施工资质；技术满分10",
+      "document_hash": "517f856cbfa60f2abe2945cfd12ec307d24a40b0fe63bc390087b66be9957a35",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    }
+  ]
+}

@@ -1,0 +1,1078 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "招投标辅助评审后端",
+    "version": "0.2.0"
+  },
+  "paths": {
+    "/api/v1/health/live": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Live",
+        "operationId": "health_live",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/health/ready": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Ready",
+        "operationId": "health_ready",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorBody": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "details": {
+            "additionalProperties": true,
+            "title": "Details",
+            "type": "object"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "request_id"
+        ],
+        "title": "ErrorBody",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "HealthResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "enum": [
+              "live",
+              "ready"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "model_configured": {
+            "default": false,
+            "title": "Model Configured",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "HealthResponse",
+        "type": "object"
+      },
+      "BidderCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "BidderCreate",
+        "type": "object"
+      },
+      "BidderResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "bidder_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Bidder Id",
+            "type": "string"
+          },
+          "project_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Project Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "bidder_id",
+          "project_id"
+        ],
+        "title": "BidderResponse",
+        "type": "object"
+      },
+      "DocumentChunk": {
+        "additionalProperties": false,
+        "properties": {
+          "document_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Document Id",
+            "type": "string"
+          },
+          "chunk_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Chunk Id",
+            "type": "string"
+          },
+          "text": {
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "document_hash": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Document Hash",
+            "type": "string"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Page"
+          },
+          "sheet": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sheet"
+          },
+          "row_start": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Row Start"
+          },
+          "row_end": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Row End"
+          },
+          "column_start": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Column Start"
+          },
+          "column_end": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Column End"
+          },
+          "quality": {
+            "default": "good",
+            "enum": [
+              "good",
+              "needs_review"
+            ],
+            "title": "Quality",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document_id",
+          "chunk_id",
+          "text",
+          "document_hash"
+        ],
+        "title": "DocumentChunk",
+        "type": "object"
+      },
+      "DocumentResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "document_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Document Id",
+            "type": "string"
+          },
+          "project_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Project Id",
+            "type": "string"
+          },
+          "bidder_id": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Bidder Id"
+          },
+          "role": {
+            "enum": [
+              "announcement",
+              "tender",
+              "bid",
+              "profile"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "ready",
+              "needs_review",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "document_hash": {
+            "title": "Document Hash",
+            "type": "string"
+          },
+          "diagnostics": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Diagnostics",
+            "type": "array"
+          }
+        },
+        "required": [
+          "document_id",
+          "project_id",
+          "role",
+          "status",
+          "document_hash"
+        ],
+        "title": "DocumentResponse",
+        "type": "object"
+      },
+      "EvidenceRef": {
+        "additionalProperties": false,
+        "properties": {
+          "document_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Document Id",
+            "type": "string"
+          },
+          "document_hash": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Document Hash",
+            "type": "string"
+          },
+          "chunk_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Chunk Id",
+            "type": "string"
+          },
+          "quote": {
+            "minLength": 1,
+            "title": "Quote",
+            "type": "string"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Page"
+          },
+          "sheet": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sheet"
+          },
+          "row_start": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Row Start"
+          },
+          "row_end": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Row End"
+          },
+          "column_start": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Column Start"
+          },
+          "column_end": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Column End"
+          }
+        },
+        "required": [
+          "document_id",
+          "document_hash",
+          "chunk_id",
+          "quote"
+        ],
+        "title": "EvidenceRef",
+        "type": "object"
+      },
+      "OpportunityRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Queries",
+            "type": "array"
+          },
+          "regions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Regions",
+            "type": "array"
+          },
+          "min_budget": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Min Budget"
+          },
+          "max_budget": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Max Budget"
+          },
+          "max_candidates": {
+            "default": 5,
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Max Candidates",
+            "type": "integer"
+          }
+        },
+        "title": "OpportunityRequest",
+        "type": "object"
+      },
+      "Page_DocumentChunk_": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentChunk"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Next Cursor"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "Page[DocumentChunk]",
+        "type": "object"
+      },
+      "Page_RunResponse_": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RunResponse"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Next Cursor"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "Page[RunResponse]",
+        "type": "object"
+      },
+      "ProjectCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "ProjectCreate",
+        "type": "object"
+      },
+      "ProjectResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "project_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Project Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "project_id"
+        ],
+        "title": "ProjectResponse",
+        "type": "object"
+      },
+      "QualificationCheck": {
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "status": {
+            "default": "needs_review",
+            "enum": [
+              "passed",
+              "failed",
+              "needs_review"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "mandatory": {
+            "default": true,
+            "title": "Mandatory",
+            "type": "boolean"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceRef"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "reason": {
+            "default": "",
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule_id"
+        ],
+        "title": "QualificationCheck",
+        "type": "object"
+      },
+      "QualificationResult": {
+        "additionalProperties": false,
+        "properties": {
+          "bidder_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Bidder Id",
+            "type": "string"
+          },
+          "bidder_name": {
+            "default": "",
+            "title": "Bidder Name",
+            "type": "string"
+          },
+          "status": {
+            "default": "needs_review",
+            "enum": [
+              "passed",
+              "failed",
+              "needs_review"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/QualificationCheck"
+            },
+            "title": "Checks",
+            "type": "array"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceRef"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Reasons",
+            "type": "array"
+          }
+        },
+        "required": [
+          "bidder_id"
+        ],
+        "title": "QualificationResult",
+        "type": "object"
+      },
+      "ReviewDecision": {
+        "additionalProperties": false,
+        "properties": {
+          "decision": {
+            "enum": [
+              "confirm",
+              "edit",
+              "reject"
+            ],
+            "title": "Decision",
+            "type": "string"
+          },
+          "target_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Target Id",
+            "type": "string"
+          },
+          "patch": {
+            "additionalProperties": true,
+            "title": "Patch",
+            "type": "object"
+          },
+          "reason": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "actor": {
+            "default": "local_user",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Actor",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 1,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "decision",
+          "target_id",
+          "reason",
+          "expected_version"
+        ],
+        "title": "ReviewDecision",
+        "type": "object"
+      },
+      "RunCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "enum": [
+              "bid_evaluation",
+              "opportunity_discovery"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "project_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Project Id",
+            "type": "string"
+          },
+          "document_ids": {
+            "items": {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "type": "string"
+            },
+            "title": "Document Ids",
+            "type": "array"
+          },
+          "company_id": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Company Id"
+          },
+          "company_revision": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Company Revision"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpportunityRequest"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "type",
+          "project_id"
+        ],
+        "title": "RunCreate",
+        "type": "object"
+      },
+      "RunResponse": {
+        "properties": {
+          "run_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Run Id",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "bid_evaluation",
+              "opportunity_discovery"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "project_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Project Id",
+            "type": "string"
+          },
+          "status": {
+            "default": "pending",
+            "enum": [
+              "pending",
+              "running",
+              "awaiting_review",
+              "succeeded",
+              "failed",
+              "cancelled"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "current_step": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Current Step"
+          },
+          "completed_steps": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Completed Steps",
+            "type": "array"
+          },
+          "known_steps": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Known Steps",
+            "type": "array"
+          },
+          "cancel_requested": {
+            "default": false,
+            "title": "Cancel Requested",
+            "type": "boolean"
+          },
+          "review_count": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Review Count",
+            "type": "integer"
+          },
+          "revision": {
+            "default": 1,
+            "minimum": 1,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "result_stale": {
+            "default": false,
+            "title": "Result Stale",
+            "type": "boolean"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Error"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "type",
+          "project_id"
+        ],
+        "title": "RunResponse",
+        "type": "object"
+      },
+      "ScoreItem": {
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "score": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Score",
+            "type": "string"
+          },
+          "max_score": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Max Score",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceRef"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "inputs": {
+            "additionalProperties": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            "title": "Inputs",
+            "type": "object"
+          }
+        },
+        "required": [
+          "rule_id",
+          "score",
+          "max_score"
+        ],
+        "title": "ScoreItem",
+        "type": "object"
+      },
+      "ScoreResult": {
+        "additionalProperties": false,
+        "properties": {
+          "bidder_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Bidder Id",
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ScoreItem"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "total_score": {
+            "default": 0,
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Total Score",
+            "type": "string"
+          },
+          "max_total_score": {
+            "default": 0,
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Max Total Score",
+            "type": "string"
+          },
+          "valid": {
+            "default": false,
+            "title": "Valid",
+            "type": "boolean"
+          },
+          "errors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Errors",
+            "type": "array"
+          },
+          "reference_only": {
+            "default": false,
+            "title": "Reference Only",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "bidder_id"
+        ],
+        "title": "ScoreResult",
+        "type": "object"
+      }
+    }
+  }
+}

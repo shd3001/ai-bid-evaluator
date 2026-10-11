@@ -1,0 +1,42 @@
+{
+  "document": {
+    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+    "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+    "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+    "role": "bid",
+    "status": "ready",
+    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+    "diagnostics": [],
+    "format": ".md",
+    "parser": "md",
+    "chunk_count": 1
+  },
+  "chunks": [
+    {
+      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+      "text": "BidB 施工资质有效，技术方案",
+      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    },
+    {
+      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+      "chunk_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3_1",
+      "text": "BidB 施工资质有效，技术方案",
+      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "document": {
+    "document_id": "doc_bebf08fbe8584b4caae56f03542eb65f",
+    "project_id": "project_9b0dbacfd37c4ca8902fd5734f6e73b6",
+    "bidder_id": null,
+    "role": "profile",
+    "status": "ready",
+    "document_hash": "c2804f4a6139b449879342f3214d9e6f8a3c7861a2407440306cb09dd1e2ad7a",
+    "diagnostics": [],
+    "format": ".md",
+    "parser": "md",
+    "chunk_count": 1
+  },
+  "chunks": [
+    {
+      "document_id": "doc_bebf08fbe8584b4caae56f03542eb65f",
+      "chunk_id": "chunk_7ee272e9398d4ed4e265ca622978cdb1c55a784227e42538",
+      "text": "企业持有施工资质",
+      "document_hash": "c2804f4a6139b449879342f3214d9e6f8a3c7861a2407440306cb09dd1e2ad7a",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    },
+    {
+      "document_id": "doc_bebf08fbe8584b4caae56f03542eb65f",
+      "chunk_id": "doc_bebf08fbe8584b4caae56f03542eb65f_1",
+      "text": "企业持有施工资质",
+      "document_hash": "c2804f4a6139b449879342f3214d9e6f8a3c7861a2407440306cb09dd1e2ad7a",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    }
+  ]
+}

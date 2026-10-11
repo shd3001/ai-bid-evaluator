@@ -1,0 +1,14 @@
+{
+  "sample": "synthetic 2-page PDF",
+  "generic_markitdown_nonempty": true,
+  "generic_api_exposes_page_coordinates": false,
+  "selected_parser": "pdfplumber",
+  "selected_status": "ready",
+  "selected_page_locations": [
+    1,
+    2
+  ],
+  "selected_table_coordinates": "verified separately with actual 2-page grid fixture",
+  "ocr_engine_available": false,
+  "selection_reason": "retain page/table evidence; do not silently treat scans as success"
+}

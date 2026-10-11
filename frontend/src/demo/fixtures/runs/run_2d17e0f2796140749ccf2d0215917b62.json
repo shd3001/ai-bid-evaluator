@@ -1,0 +1,1798 @@
+{
+  "run": {
+    "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+    "type": "bid_evaluation",
+    "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+    "status": "succeeded",
+    "current_step": "report",
+    "completed_steps": [
+      "ingest",
+      "extract",
+      "assess",
+      "report"
+    ],
+    "known_steps": [
+      "ingest",
+      "extract",
+      "assess",
+      "report"
+    ],
+    "cancel_requested": false,
+    "review_count": 0,
+    "revision": 18,
+    "result_stale": false,
+    "error": null,
+    "created_at": "2026-10-04T13:07:05.660436Z",
+    "updated_at": "2026-10-04T13:07:05.777575Z"
+  },
+  "events": [
+    {
+      "seq": 1,
+      "event": "created",
+      "revision": 1,
+      "at": "2026-10-04T13:07:05.661431Z",
+      "details": {}
+    },
+    {
+      "seq": 2,
+      "event": "claimed",
+      "revision": 2,
+      "at": "2026-10-04T13:07:05.668429Z",
+      "details": {}
+    },
+    {
+      "seq": 3,
+      "event": "step_started",
+      "revision": 3,
+      "at": "2026-10-04T13:07:05.673429Z",
+      "details": {
+        "step": "ingest",
+        "input_hash": "0355414a1b4dc7802c2e3180eb46c97b8029a90fa1842d824583bd0663e95f20",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 4,
+      "event": "step_completed",
+      "revision": 4,
+      "at": "2026-10-04T13:07:05.682438Z",
+      "details": {
+        "step": "ingest"
+      }
+    },
+    {
+      "seq": 5,
+      "event": "step_started",
+      "revision": 5,
+      "at": "2026-10-04T13:07:05.686431Z",
+      "details": {
+        "step": "extract",
+        "input_hash": "4ee1b45dd6d84c75f09f551fa9c534871995903409589c6aed8dc8ca5919af04",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 6,
+      "event": "model_call",
+      "revision": 5,
+      "at": "2026-10-04T13:07:05.692437Z",
+      "details": {
+        "task": "extract_rules",
+        "input_hash": "88d8f7e44d3c13b199c2ee50a8be23f76fd5fa8c02cc38a44dbd4085268f5f58",
+        "attempt": 1,
+        "status": "invalid_json",
+        "usage": {},
+        "model": "bailian",
+        "prompt_version": "2",
+        "schema_version": "2"
+      }
+    },
+    {
+      "seq": 7,
+      "event": "model_call",
+      "revision": 5,
+      "at": "2026-10-04T13:07:05.694429Z",
+      "details": {
+        "task": "extract_rules",
+        "input_hash": "88d8f7e44d3c13b199c2ee50a8be23f76fd5fa8c02cc38a44dbd4085268f5f58",
+        "attempt": 2,
+        "usage": {},
+        "status": "succeeded",
+        "model": "bailian",
+        "prompt_version": "2",
+        "schema_version": "2"
+      }
+    },
+    {
+      "seq": 8,
+      "event": "model_call",
+      "revision": 5,
+      "at": "2026-10-04T13:07:05.698430Z",
+      "details": {
+        "task": "extract_rules",
+        "input_hash": "127fd1bffed62bb412eed008800b7be5553734b7c2b7c31be0ec9f5699b200a7",
+        "attempt": 1,
+        "usage": {},
+        "status": "succeeded",
+        "model": "bailian",
+        "prompt_version": "2",
+        "schema_version": "2"
+      }
+    },
+    {
+      "seq": 9,
+      "event": "awaiting_review",
+      "revision": 6,
+      "at": "2026-10-04T13:07:05.701433Z",
+      "details": {
+        "step": "extract"
+      }
+    },
+    {
+      "seq": 10,
+      "event": "review_applied",
+      "revision": 7,
+      "at": "2026-10-04T13:07:05.709436Z",
+      "details": {
+        "target_id": "extract"
+      }
+    },
+    {
+      "seq": 11,
+      "event": "claimed",
+      "revision": 8,
+      "at": "2026-10-04T13:07:05.718439Z",
+      "details": {}
+    },
+    {
+      "seq": 12,
+      "event": "step_started",
+      "revision": 9,
+      "at": "2026-10-04T13:07:05.721909Z",
+      "details": {
+        "step": "assess",
+        "input_hash": "4402c0bc2b996411439b473e34afac4f3bac81749ee47eae80c46f3b71e8aadc",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 13,
+      "event": "model_call",
+      "revision": 9,
+      "at": "2026-10-04T13:07:05.727192Z",
+      "details": {
+        "task": "assess_bidder",
+        "input_hash": "d64b5eda558b687bd1d241bf4b3d5b2982b5bee0fb2b8e4587a5a48b7c9ea04b",
+        "attempt": 1,
+        "usage": {},
+        "status": "succeeded",
+        "model": "bailian",
+        "prompt_version": "2",
+        "schema_version": "2"
+      }
+    },
+    {
+      "seq": 14,
+      "event": "model_call",
+      "revision": 9,
+      "at": "2026-10-04T13:07:05.731200Z",
+      "details": {
+        "task": "assess_bidder",
+        "input_hash": "928edb95cf467c61fd9791b8428d745b7479726126d14580c551ad40c1874a34",
+        "attempt": 1,
+        "usage": {},
+        "status": "succeeded",
+        "model": "bailian",
+        "prompt_version": "2",
+        "schema_version": "2"
+      }
+    },
+    {
+      "seq": 15,
+      "event": "step_completed",
+      "revision": 10,
+      "at": "2026-10-04T13:07:05.733206Z",
+      "details": {
+        "step": "assess"
+      }
+    },
+    {
+      "seq": 16,
+      "event": "step_started",
+      "revision": 11,
+      "at": "2026-10-04T13:07:05.737195Z",
+      "details": {
+        "step": "report",
+        "input_hash": "3efea021aad5486e708a6a63c88b96b2d9a7471c4c7bf38985df7e3e101cfd86",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 17,
+      "event": "step_completed",
+      "revision": 12,
+      "at": "2026-10-04T13:07:05.740203Z",
+      "details": {
+        "step": "report"
+      }
+    },
+    {
+      "seq": 18,
+      "event": "succeeded",
+      "revision": 13,
+      "at": "2026-10-04T13:07:05.742692Z",
+      "details": {}
+    },
+    {
+      "seq": 19,
+      "event": "review_applied",
+      "revision": 14,
+      "at": "2026-10-04T13:07:05.759586Z",
+      "details": {
+        "target_id": "assess"
+      }
+    },
+    {
+      "seq": 20,
+      "event": "claimed",
+      "revision": 15,
+      "at": "2026-10-04T13:07:05.767576Z",
+      "details": {}
+    },
+    {
+      "seq": 21,
+      "event": "step_started",
+      "revision": 16,
+      "at": "2026-10-04T13:07:05.771578Z",
+      "details": {
+        "step": "report",
+        "input_hash": "8d3e1064a02bb31e7837d71705caf61b8db328a89336ed4cccb46da9f1bd26ad",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 22,
+      "event": "step_completed",
+      "revision": 17,
+      "at": "2026-10-04T13:07:05.774575Z",
+      "details": {
+        "step": "report"
+      }
+    },
+    {
+      "seq": 23,
+      "event": "succeeded",
+      "revision": 18,
+      "at": "2026-10-04T13:07:05.777575Z",
+      "details": {}
+    }
+  ],
+  "results": {
+    "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+    "revision": 18,
+    "stale": false,
+    "confirmed": true,
+    "data": {
+      "qualifications": [
+        {
+          "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+          "bidder_name": "",
+          "status": "passed",
+          "checks": [
+            {
+              "rule_id": "q1",
+              "status": "passed",
+              "mandatory": true,
+              "evidence": [
+                {
+                  "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                  "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                  "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                  "quote": "BidA 施工资质有效，技术方案",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ],
+              "reason": ""
+            }
+          ],
+          "evidence": [],
+          "reasons": []
+        },
+        {
+          "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+          "bidder_name": "",
+          "status": "passed",
+          "checks": [
+            {
+              "rule_id": "q1",
+              "status": "passed",
+              "mandatory": true,
+              "evidence": [
+                {
+                  "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                  "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                  "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                  "quote": "BidB 施工资质有效，技术方案",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ],
+              "reason": ""
+            }
+          ],
+          "evidence": [],
+          "reasons": []
+        }
+      ],
+      "scores": [
+        {
+          "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+          "items": [
+            {
+              "rule_id": "s1",
+              "score": "8.5",
+              "max_score": "10",
+              "evidence": [
+                {
+                  "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                  "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                  "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                  "quote": "BidA 施工资质有效，技术方案",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ],
+              "inputs": {}
+            }
+          ],
+          "total_score": "8.5",
+          "max_total_score": "10",
+          "valid": true,
+          "errors": [],
+          "reference_only": false
+        },
+        {
+          "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+          "items": [
+            {
+              "rule_id": "s1",
+              "score": "6.25",
+              "max_score": "10",
+              "evidence": [
+                {
+                  "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                  "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                  "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                  "quote": "BidB 施工资质有效，技术方案",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ],
+              "inputs": {}
+            }
+          ],
+          "total_score": "6.25",
+          "max_total_score": "10",
+          "valid": true,
+          "errors": [],
+          "reference_only": false
+        }
+      ],
+      "confirmed": true,
+      "score_alternatives": {
+        "bidder_4bb6de1e694040cf8be853d1b2ed618b": {
+          "s1": [
+            {
+              "rule_id": "s1",
+              "score": "6.25",
+              "max_score": "10",
+              "evidence": [
+                {
+                  "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                  "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                  "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                  "quote": "BidB 施工资质有效，技术方案",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ],
+              "inputs": {}
+            }
+          ]
+        },
+        "bidder_6fd24f5f16344a359c530e7194dc51a5": {
+          "s1": [
+            {
+              "rule_id": "s1",
+              "score": "8.5",
+              "max_score": "10",
+              "evidence": [
+                {
+                  "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                  "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                  "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                  "quote": "BidA 施工资质有效，技术方案",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ],
+              "inputs": {}
+            }
+          ]
+        }
+      }
+    },
+    "evidence_matrix": [
+      {
+        "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+        "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+        "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+        "quote": "BidA 施工资质有效，技术方案",
+        "page": null,
+        "sheet": null,
+        "row_start": null,
+        "row_end": null,
+        "column_start": null,
+        "column_end": null
+      },
+      {
+        "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+        "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+        "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+        "quote": "BidB 施工资质有效，技术方案",
+        "page": null,
+        "sheet": null,
+        "row_start": null,
+        "row_end": null,
+        "column_start": null,
+        "column_end": null
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "review_id": "1",
+      "kind": "history",
+      "target_id": "extract",
+      "revision": 7,
+      "payload": {
+        "decision": "confirm",
+        "target_id": "extract",
+        "patch": {},
+        "reason": "核对招标文件抽取的资格与评分规则",
+        "actor": "local_user",
+        "expected_version": 6,
+        "before": {
+          "rules": [
+            {
+              "rule_id": "q1",
+              "title": "施工资质",
+              "kind": "qualification",
+              "mandatory": true,
+              "confirmed": false,
+              "max_score": "0",
+              "operation": "manual",
+              "parameters": {},
+              "children": [],
+              "evidence": [
+                {
+                  "document_id": "doc_2ea5907f5af843328f2bbd16589a993c",
+                  "document_hash": "86688a6ead9e1734e6f22f98afb66bced819030c3ff4c09df0756caa91448cea",
+                  "chunk_id": "chunk_9c87629bc410fa432ea7d9d8d9d1117ccefcfceff6a4264f",
+                  "quote": "公告资格要求",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                },
+                {
+                  "document_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae",
+                  "document_hash": "517f856cbfa60f2abe2945cfd12ec307d24a40b0fe63bc390087b66be9957a35",
+                  "chunk_id": "chunk_232bed4c8fa9a813ed419d4f4bbf96df03ef7fdf3aad85b7",
+                  "quote": "施工资质；技术满分10",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ]
+            },
+            {
+              "rule_id": "s1",
+              "title": "技术",
+              "kind": "score",
+              "mandatory": true,
+              "confirmed": false,
+              "max_score": "10",
+              "operation": "manual",
+              "parameters": {},
+              "children": [],
+              "evidence": [
+                {
+                  "document_id": "doc_2ea5907f5af843328f2bbd16589a993c",
+                  "document_hash": "86688a6ead9e1734e6f22f98afb66bced819030c3ff4c09df0756caa91448cea",
+                  "chunk_id": "chunk_9c87629bc410fa432ea7d9d8d9d1117ccefcfceff6a4264f",
+                  "quote": "公告资格要求",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                },
+                {
+                  "document_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae",
+                  "document_hash": "517f856cbfa60f2abe2945cfd12ec307d24a40b0fe63bc390087b66be9957a35",
+                  "chunk_id": "chunk_232bed4c8fa9a813ed419d4f4bbf96df03ef7fdf3aad85b7",
+                  "quote": "施工资质；技术满分10",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ]
+            }
+          ],
+          "confirmed": false
+        },
+        "after": {
+          "rules": [
+            {
+              "rule_id": "q1",
+              "title": "施工资质",
+              "kind": "qualification",
+              "mandatory": true,
+              "confirmed": true,
+              "max_score": "0",
+              "operation": "manual",
+              "parameters": {},
+              "children": [],
+              "evidence": [
+                {
+                  "document_id": "doc_2ea5907f5af843328f2bbd16589a993c",
+                  "document_hash": "86688a6ead9e1734e6f22f98afb66bced819030c3ff4c09df0756caa91448cea",
+                  "chunk_id": "chunk_9c87629bc410fa432ea7d9d8d9d1117ccefcfceff6a4264f",
+                  "quote": "公告资格要求",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                },
+                {
+                  "document_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae",
+                  "document_hash": "517f856cbfa60f2abe2945cfd12ec307d24a40b0fe63bc390087b66be9957a35",
+                  "chunk_id": "chunk_232bed4c8fa9a813ed419d4f4bbf96df03ef7fdf3aad85b7",
+                  "quote": "施工资质；技术满分10",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ]
+            },
+            {
+              "rule_id": "s1",
+              "title": "技术",
+              "kind": "score",
+              "mandatory": true,
+              "confirmed": true,
+              "max_score": "10",
+              "operation": "manual",
+              "parameters": {},
+              "children": [],
+              "evidence": [
+                {
+                  "document_id": "doc_2ea5907f5af843328f2bbd16589a993c",
+                  "document_hash": "86688a6ead9e1734e6f22f98afb66bced819030c3ff4c09df0756caa91448cea",
+                  "chunk_id": "chunk_9c87629bc410fa432ea7d9d8d9d1117ccefcfceff6a4264f",
+                  "quote": "公告资格要求",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                },
+                {
+                  "document_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae",
+                  "document_hash": "517f856cbfa60f2abe2945cfd12ec307d24a40b0fe63bc390087b66be9957a35",
+                  "chunk_id": "chunk_232bed4c8fa9a813ed419d4f4bbf96df03ef7fdf3aad85b7",
+                  "quote": "施工资质；技术满分10",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ]
+            }
+          ],
+          "confirmed": true
+        },
+        "at": "2026-10-04T13:07:05.709436+00:00",
+        "source_revision": 6,
+        "revision": 7
+      }
+    },
+    {
+      "review_id": "2",
+      "kind": "history",
+      "target_id": "assess",
+      "revision": 14,
+      "payload": {
+        "decision": "edit",
+        "target_id": "assess",
+        "patch": {
+          "scores": [
+            {
+              "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+              "items": [
+                {
+                  "rule_id": "s1",
+                  "score": "8.5",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                      "quote": "BidA 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ],
+              "total_score": "8.5",
+              "max_total_score": "10",
+              "valid": true,
+              "errors": [],
+              "reference_only": false
+            },
+            {
+              "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+              "items": [
+                {
+                  "rule_id": "s1",
+                  "score": "6.25",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                      "quote": "BidB 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ],
+              "total_score": "6.25",
+              "max_total_score": "10",
+              "valid": true,
+              "errors": [],
+              "reference_only": false
+            }
+          ],
+          "qualifications": [
+            {
+              "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+              "bidder_name": "",
+              "status": "passed",
+              "checks": [
+                {
+                  "rule_id": "q1",
+                  "status": "passed",
+                  "mandatory": true,
+                  "evidence": [
+                    {
+                      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                      "quote": "BidA 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "reason": ""
+                }
+              ],
+              "evidence": [],
+              "reasons": []
+            },
+            {
+              "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+              "bidder_name": "",
+              "status": "passed",
+              "checks": [
+                {
+                  "rule_id": "q1",
+                  "status": "passed",
+                  "mandatory": true,
+                  "evidence": [
+                    {
+                      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                      "quote": "BidB 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "reason": ""
+                }
+              ],
+              "evidence": [],
+              "reasons": []
+            }
+          ]
+        },
+        "reason": "人工改分并按实际评审口径重排名次",
+        "actor": "local_user",
+        "expected_version": 13,
+        "before": {
+          "qualifications": [
+            {
+              "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+              "bidder_name": "",
+              "status": "passed",
+              "checks": [
+                {
+                  "rule_id": "q1",
+                  "status": "passed",
+                  "mandatory": true,
+                  "evidence": [
+                    {
+                      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                      "quote": "BidB 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "reason": ""
+                }
+              ],
+              "evidence": [],
+              "reasons": []
+            },
+            {
+              "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+              "bidder_name": "",
+              "status": "passed",
+              "checks": [
+                {
+                  "rule_id": "q1",
+                  "status": "passed",
+                  "mandatory": true,
+                  "evidence": [
+                    {
+                      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                      "quote": "BidA 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "reason": ""
+                }
+              ],
+              "evidence": [],
+              "reasons": []
+            }
+          ],
+          "scores": [
+            {
+              "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+              "items": [
+                {
+                  "rule_id": "s1",
+                  "score": "6.25",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                      "quote": "BidB 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ],
+              "total_score": "6.25",
+              "max_total_score": "10",
+              "valid": true,
+              "errors": [],
+              "reference_only": false
+            },
+            {
+              "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+              "items": [
+                {
+                  "rule_id": "s1",
+                  "score": "8.5",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                      "quote": "BidA 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ],
+              "total_score": "8.5",
+              "max_total_score": "10",
+              "valid": true,
+              "errors": [],
+              "reference_only": false
+            }
+          ],
+          "confirmed": true,
+          "score_alternatives": {
+            "bidder_4bb6de1e694040cf8be853d1b2ed618b": {
+              "s1": [
+                {
+                  "rule_id": "s1",
+                  "score": "6.25",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                      "quote": "BidB 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ]
+            },
+            "bidder_6fd24f5f16344a359c530e7194dc51a5": {
+              "s1": [
+                {
+                  "rule_id": "s1",
+                  "score": "8.5",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                      "quote": "BidA 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ]
+            }
+          }
+        },
+        "after": {
+          "qualifications": [
+            {
+              "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+              "bidder_name": "",
+              "status": "passed",
+              "checks": [
+                {
+                  "rule_id": "q1",
+                  "status": "passed",
+                  "mandatory": true,
+                  "evidence": [
+                    {
+                      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                      "quote": "BidA 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "reason": ""
+                }
+              ],
+              "evidence": [],
+              "reasons": []
+            },
+            {
+              "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+              "bidder_name": "",
+              "status": "passed",
+              "checks": [
+                {
+                  "rule_id": "q1",
+                  "status": "passed",
+                  "mandatory": true,
+                  "evidence": [
+                    {
+                      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                      "quote": "BidB 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "reason": ""
+                }
+              ],
+              "evidence": [],
+              "reasons": []
+            }
+          ],
+          "scores": [
+            {
+              "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+              "items": [
+                {
+                  "rule_id": "s1",
+                  "score": "8.5",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                      "quote": "BidA 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ],
+              "total_score": "8.5",
+              "max_total_score": "10",
+              "valid": true,
+              "errors": [],
+              "reference_only": false
+            },
+            {
+              "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+              "items": [
+                {
+                  "rule_id": "s1",
+                  "score": "6.25",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                      "quote": "BidB 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ],
+              "total_score": "6.25",
+              "max_total_score": "10",
+              "valid": true,
+              "errors": [],
+              "reference_only": false
+            }
+          ],
+          "confirmed": true,
+          "score_alternatives": {
+            "bidder_4bb6de1e694040cf8be853d1b2ed618b": {
+              "s1": [
+                {
+                  "rule_id": "s1",
+                  "score": "6.25",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                      "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                      "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                      "quote": "BidB 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ]
+            },
+            "bidder_6fd24f5f16344a359c530e7194dc51a5": {
+              "s1": [
+                {
+                  "rule_id": "s1",
+                  "score": "8.5",
+                  "max_score": "10",
+                  "evidence": [
+                    {
+                      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                      "quote": "BidA 施工资质有效，技术方案",
+                      "page": null,
+                      "sheet": null,
+                      "row_start": null,
+                      "row_end": null,
+                      "column_start": null,
+                      "column_end": null
+                    }
+                  ],
+                  "inputs": {}
+                }
+              ]
+            }
+          }
+        },
+        "at": "2026-10-04T13:07:05.759586+00:00",
+        "source_revision": 13,
+        "revision": 14
+      }
+    }
+  ],
+  "reports": [
+    {
+      "report_id": "1",
+      "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+      "revision": 12,
+      "stale": true,
+      "confirmed": false,
+      "data": {
+        "project_name": "合成示例：某市政工程施工总承包评标",
+        "ranking": [
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "bidder_name": "",
+            "qualification_status": "passed",
+            "total_score": "8.5",
+            "rank": 1,
+            "recommended": true,
+            "reference_only": false,
+            "score_valid": true,
+            "review_points": []
+          },
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "bidder_name": "",
+            "qualification_status": "passed",
+            "total_score": "6.25",
+            "rank": 2,
+            "recommended": true,
+            "reference_only": false,
+            "score_valid": true,
+            "review_points": []
+          }
+        ],
+        "bidders": [
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "items": [
+              {
+                "rule_id": "s1",
+                "score": "6.25",
+                "max_score": "10",
+                "evidence": [
+                  {
+                    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                    "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                    "quote": "BidB 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "inputs": {}
+              }
+            ],
+            "total_score": "6.25",
+            "max_total_score": "10",
+            "valid": true,
+            "errors": [],
+            "reference_only": false
+          },
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "items": [
+              {
+                "rule_id": "s1",
+                "score": "8.5",
+                "max_score": "10",
+                "evidence": [
+                  {
+                    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                    "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                    "quote": "BidA 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "inputs": {}
+              }
+            ],
+            "total_score": "8.5",
+            "max_total_score": "10",
+            "valid": true,
+            "errors": [],
+            "reference_only": false
+          }
+        ],
+        "qualification_results": [
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "bidder_name": "",
+            "status": "passed",
+            "checks": [
+              {
+                "rule_id": "q1",
+                "status": "passed",
+                "mandatory": true,
+                "evidence": [
+                  {
+                    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                    "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                    "quote": "BidB 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "reason": ""
+              }
+            ],
+            "evidence": [],
+            "reasons": []
+          },
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "bidder_name": "",
+            "status": "passed",
+            "checks": [
+              {
+                "rule_id": "q1",
+                "status": "passed",
+                "mandatory": true,
+                "evidence": [
+                  {
+                    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                    "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                    "quote": "BidA 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "reason": ""
+              }
+            ],
+            "evidence": [],
+            "reasons": []
+          }
+        ],
+        "disqualified_bidders": [],
+        "manual_review_points": [],
+        "confirmed": true,
+        "final_conclusion": "按确认规则生成辅助评审结果"
+      }
+    },
+    {
+      "report_id": "2",
+      "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+      "revision": 17,
+      "stale": false,
+      "confirmed": true,
+      "data": {
+        "project_name": "合成示例：某市政工程施工总承包评标",
+        "ranking": [
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "bidder_name": "",
+            "qualification_status": "passed",
+            "total_score": "8.5",
+            "rank": 1,
+            "recommended": true,
+            "reference_only": false,
+            "score_valid": true,
+            "review_points": []
+          },
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "bidder_name": "",
+            "qualification_status": "passed",
+            "total_score": "6.25",
+            "rank": 2,
+            "recommended": true,
+            "reference_only": false,
+            "score_valid": true,
+            "review_points": []
+          }
+        ],
+        "bidders": [
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "items": [
+              {
+                "rule_id": "s1",
+                "score": "8.5",
+                "max_score": "10",
+                "evidence": [
+                  {
+                    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                    "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                    "quote": "BidA 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "inputs": {}
+              }
+            ],
+            "total_score": "8.5",
+            "max_total_score": "10",
+            "valid": true,
+            "errors": [],
+            "reference_only": false
+          },
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "items": [
+              {
+                "rule_id": "s1",
+                "score": "6.25",
+                "max_score": "10",
+                "evidence": [
+                  {
+                    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                    "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                    "quote": "BidB 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "inputs": {}
+              }
+            ],
+            "total_score": "6.25",
+            "max_total_score": "10",
+            "valid": true,
+            "errors": [],
+            "reference_only": false
+          }
+        ],
+        "qualification_results": [
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "bidder_name": "",
+            "status": "passed",
+            "checks": [
+              {
+                "rule_id": "q1",
+                "status": "passed",
+                "mandatory": true,
+                "evidence": [
+                  {
+                    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                    "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                    "quote": "BidA 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "reason": ""
+              }
+            ],
+            "evidence": [],
+            "reasons": []
+          },
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "bidder_name": "",
+            "status": "passed",
+            "checks": [
+              {
+                "rule_id": "q1",
+                "status": "passed",
+                "mandatory": true,
+                "evidence": [
+                  {
+                    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                    "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                    "quote": "BidB 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "reason": ""
+              }
+            ],
+            "evidence": [],
+            "reasons": []
+          }
+        ],
+        "disqualified_bidders": [],
+        "manual_review_points": [],
+        "confirmed": true,
+        "final_conclusion": "按确认规则生成辅助评审结果"
+      }
+    }
+  ],
+  "report_details": {
+    "1": {
+      "report_id": "1",
+      "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+      "revision": 12,
+      "stale": true,
+      "confirmed": false,
+      "data": {
+        "project_name": "合成示例：某市政工程施工总承包评标",
+        "ranking": [
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "bidder_name": "",
+            "qualification_status": "passed",
+            "total_score": "8.5",
+            "rank": 1,
+            "recommended": true,
+            "reference_only": false,
+            "score_valid": true,
+            "review_points": []
+          },
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "bidder_name": "",
+            "qualification_status": "passed",
+            "total_score": "6.25",
+            "rank": 2,
+            "recommended": true,
+            "reference_only": false,
+            "score_valid": true,
+            "review_points": []
+          }
+        ],
+        "bidders": [
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "items": [
+              {
+                "rule_id": "s1",
+                "score": "6.25",
+                "max_score": "10",
+                "evidence": [
+                  {
+                    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                    "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                    "quote": "BidB 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "inputs": {}
+              }
+            ],
+            "total_score": "6.25",
+            "max_total_score": "10",
+            "valid": true,
+            "errors": [],
+            "reference_only": false
+          },
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "items": [
+              {
+                "rule_id": "s1",
+                "score": "8.5",
+                "max_score": "10",
+                "evidence": [
+                  {
+                    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                    "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                    "quote": "BidA 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "inputs": {}
+              }
+            ],
+            "total_score": "8.5",
+            "max_total_score": "10",
+            "valid": true,
+            "errors": [],
+            "reference_only": false
+          }
+        ],
+        "qualification_results": [
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "bidder_name": "",
+            "status": "passed",
+            "checks": [
+              {
+                "rule_id": "q1",
+                "status": "passed",
+                "mandatory": true,
+                "evidence": [
+                  {
+                    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                    "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                    "quote": "BidB 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "reason": ""
+              }
+            ],
+            "evidence": [],
+            "reasons": []
+          },
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "bidder_name": "",
+            "status": "passed",
+            "checks": [
+              {
+                "rule_id": "q1",
+                "status": "passed",
+                "mandatory": true,
+                "evidence": [
+                  {
+                    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                    "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                    "quote": "BidA 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "reason": ""
+              }
+            ],
+            "evidence": [],
+            "reasons": []
+          }
+        ],
+        "disqualified_bidders": [],
+        "manual_review_points": [],
+        "confirmed": true,
+        "final_conclusion": "按确认规则生成辅助评审结果"
+      }
+    },
+    "2": {
+      "report_id": "2",
+      "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+      "revision": 17,
+      "stale": false,
+      "confirmed": true,
+      "data": {
+        "project_name": "合成示例：某市政工程施工总承包评标",
+        "ranking": [
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "bidder_name": "",
+            "qualification_status": "passed",
+            "total_score": "8.5",
+            "rank": 1,
+            "recommended": true,
+            "reference_only": false,
+            "score_valid": true,
+            "review_points": []
+          },
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "bidder_name": "",
+            "qualification_status": "passed",
+            "total_score": "6.25",
+            "rank": 2,
+            "recommended": true,
+            "reference_only": false,
+            "score_valid": true,
+            "review_points": []
+          }
+        ],
+        "bidders": [
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "items": [
+              {
+                "rule_id": "s1",
+                "score": "8.5",
+                "max_score": "10",
+                "evidence": [
+                  {
+                    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                    "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                    "quote": "BidA 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "inputs": {}
+              }
+            ],
+            "total_score": "8.5",
+            "max_total_score": "10",
+            "valid": true,
+            "errors": [],
+            "reference_only": false
+          },
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "items": [
+              {
+                "rule_id": "s1",
+                "score": "6.25",
+                "max_score": "10",
+                "evidence": [
+                  {
+                    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                    "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                    "quote": "BidB 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "inputs": {}
+              }
+            ],
+            "total_score": "6.25",
+            "max_total_score": "10",
+            "valid": true,
+            "errors": [],
+            "reference_only": false
+          }
+        ],
+        "qualification_results": [
+          {
+            "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+            "bidder_name": "",
+            "status": "passed",
+            "checks": [
+              {
+                "rule_id": "q1",
+                "status": "passed",
+                "mandatory": true,
+                "evidence": [
+                  {
+                    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+                    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+                    "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+                    "quote": "BidA 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "reason": ""
+              }
+            ],
+            "evidence": [],
+            "reasons": []
+          },
+          {
+            "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+            "bidder_name": "",
+            "status": "passed",
+            "checks": [
+              {
+                "rule_id": "q1",
+                "status": "passed",
+                "mandatory": true,
+                "evidence": [
+                  {
+                    "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+                    "document_hash": "9eee67e1869e776f8b896a707095f5d8b103dac74e811147ba16cac842217cd1",
+                    "chunk_id": "chunk_638a80cd59086592c12974b588c1e6e44c2ed6c2dc64efe1",
+                    "quote": "BidB 施工资质有效，技术方案",
+                    "page": null,
+                    "sheet": null,
+                    "row_start": null,
+                    "row_end": null,
+                    "column_start": null,
+                    "column_end": null
+                  }
+                ],
+                "reason": ""
+              }
+            ],
+            "evidence": [],
+            "reasons": []
+          }
+        ],
+        "disqualified_bidders": [],
+        "manual_review_points": [],
+        "confirmed": true,
+        "final_conclusion": "按确认规则生成辅助评审结果"
+      }
+    }
+  }
+}

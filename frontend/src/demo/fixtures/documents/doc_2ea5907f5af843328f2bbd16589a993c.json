@@ -1,0 +1,42 @@
+{
+  "document": {
+    "document_id": "doc_2ea5907f5af843328f2bbd16589a993c",
+    "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+    "bidder_id": null,
+    "role": "announcement",
+    "status": "ready",
+    "document_hash": "86688a6ead9e1734e6f22f98afb66bced819030c3ff4c09df0756caa91448cea",
+    "diagnostics": [],
+    "format": ".md",
+    "parser": "md",
+    "chunk_count": 1
+  },
+  "chunks": [
+    {
+      "document_id": "doc_2ea5907f5af843328f2bbd16589a993c",
+      "chunk_id": "chunk_9c87629bc410fa432ea7d9d8d9d1117ccefcfceff6a4264f",
+      "text": "公告资格要求",
+      "document_hash": "86688a6ead9e1734e6f22f98afb66bced819030c3ff4c09df0756caa91448cea",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    },
+    {
+      "document_id": "doc_2ea5907f5af843328f2bbd16589a993c",
+      "chunk_id": "doc_2ea5907f5af843328f2bbd16589a993c_1",
+      "text": "公告资格要求",
+      "document_hash": "86688a6ead9e1734e6f22f98afb66bced819030c3ff4c09df0756caa91448cea",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    }
+  ]
+}

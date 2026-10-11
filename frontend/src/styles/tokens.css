@@ -1,0 +1,133 @@
+/* 设计令牌（见 docs/DESIGN.md §2–§6）。所有颜色/间距/字体只从这里取。 */
+@layer tokens, base, layout, components, views, utilities;
+
+:root {
+  /* 墨（文字层级） */
+  --ink: #111820;
+  --ink-2: #3b4650;
+  --ink-3: #6d7883;
+  --ink-4: #9aa4ad;
+
+  /* 纸（背景层级） */
+  --paper: #f4f5f2;
+  --surface: #ffffff;
+  --surface-2: #edefea;
+  --surface-3: #e3e7e1;
+  --line: #dee2dc;
+  --line-strong: #c6ccc6;
+
+  /* 印（强调） */
+  --seal: #0e6b5c;
+  --seal-weak: #e2efeb;
+  --seal-ink: #0a4e44;
+  --seal-line: #bcd8d0;
+
+  /* 结论四态 */
+  --pass: #2f7d5a;
+  --pass-weak: #e6f0e9;
+  --fail: #b4362c;
+  --fail-weak: #f7e7e4;
+  --review: #8a6410;
+  --review-weak: #f5eedc;
+  --pending: #5c6873;
+  --pending-weak: #e9ecee;
+
+  /* 形状 */
+  --r-card: 20px;
+  --r-core: 16px;
+  --r-sm: 10px;
+  --r-pill: 999px;
+  --shadow-shell: 0 1px 2px rgba(17, 24, 32, 0.05), 0 8px 24px -18px rgba(17, 24, 32, 0.25);
+  --shadow-core: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --shadow-pop: 0 2px 6px rgba(17, 24, 32, 0.06), 0 24px 48px -28px rgba(17, 24, 32, 0.35);
+
+  /* 间距（4 的倍数） */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* 字体（全部落本机已有字体，不引用网络字体） */
+  --font-cjk: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC",
+    "Hiragino Sans GB", sans-serif;
+  --font-ui: "Segoe UI Variable Text", "Segoe UI", ui-sans-serif, system-ui, -apple-system, var(--font-cjk);
+  --font-display: "Segoe UI Variable Display", "Segoe UI", ui-sans-serif, system-ui, var(--font-cjk);
+  --font-ledger: "Cascadia Mono", Consolas, "SF Mono", ui-monospace, "Courier New", monospace;
+  --font-serif-cjk: "Songti SC", SimSun, "Noto Serif CJK SC", "Source Han Serif SC", serif;
+
+  --fs-display: clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem);
+  --fs-h1: 1.5rem;
+  --fs-h2: 1.15rem;
+  --fs-body: 0.95rem;
+  --fs-sm: 0.85rem;
+  --fs-xs: 0.78rem;
+  --fs-micro: 0.7rem;
+
+  /* 动效 */
+  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 布局常量 */
+  --h-top: 56px;
+  --h-phase: 46px;
+  --page-max: 1280px;
+  --page-pad: clamp(16px, 3vw, 40px);
+}
+
+[data-theme="dark"] {
+  --ink: #e8ecea;
+  --ink-2: #b7c0be;
+  --ink-3: #8b9593;
+  --ink-4: #6a7473;
+
+  --paper: #0f1416;
+  --surface: #161c1f;
+  --surface-2: #1e2528;
+  --surface-3: #262f33;
+  --line: #2a3236;
+  --line-strong: #3a4448;
+
+  --seal: #3fa894;
+  --seal-weak: #143029;
+  --seal-ink: #7fd0c0;
+  --seal-line: #24504a;
+
+  --pass: #55c08a;
+  --pass-weak: #14291f;
+  --fail: #e8776a;
+  --fail-weak: #2e1a18;
+  --review: #d9ae55;
+  --review-weak: #2c2415;
+  --pending: #93a0a6;
+  --pending-weak: #212a2e;
+
+  --shadow-shell: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 28px -20px rgba(0, 0, 0, 0.8);
+  --shadow-core: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-pop: 0 2px 8px rgba(0, 0, 0, 0.5), 0 28px 56px -32px rgba(0, 0, 0, 0.9);
+}
+
+/* 结论色映射：给任意元素加 data-verdict 取对应前景/底色。 */
+[data-verdict="passed"],
+[data-verdict="suitable"] {
+  --verdict: var(--pass);
+  --verdict-weak: var(--pass-weak);
+}
+[data-verdict="failed"],
+[data-verdict="unsuitable"] {
+  --verdict: var(--fail);
+  --verdict-weak: var(--fail-weak);
+}
+[data-verdict="needs_review"] {
+  --verdict: var(--review);
+  --verdict-weak: var(--review-weak);
+}
+[data-verdict="pending"],
+[data-verdict="unknown"] {
+  --verdict: var(--pending);
+  --verdict-weak: var(--pending-weak);
+}

@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-03",
+  "scope": "R09-R11",
+  "python": "3.11",
+  "full_suite": {
+    "command": ".venv-batch-validation/Scripts/python.exe -m pytest -q",
+    "passed": 144
+  },
+  "plan_suite": {
+    "command": ".venv-batch-validation/Scripts/python.exe -m pytest tests/unit tests/integration tests/api -q",
+    "passed": 133
+  },
+  "dependency_check": "No broken requirements found",
+  "openapi": {
+    "paths": 19,
+    "unique_operations": 22,
+    "schemas": 35,
+    "references_resolve": true
+  },
+  "typescript": {
+    "generator": "openapi-typescript 7.10.1",
+    "compiler": "TypeScript 5.9.3",
+    "strict_compile": true,
+    "generator_option": "--default-non-nullable false",
+    "files": [
+      "docs/api-types.d.ts",
+      "docs/api-client-example.ts"
+    ]
+  },
+  "packaging": {
+    "wheel_build": true,
+    "non_editable_install": true,
+    "migration_and_real_http": true,
+    "empty_worker_start_stop": true,
+    "server_stopped": true,
+    "wheel_sha256": "a7db79d9055a93b9cc3f1bbc99ac1284f3a3b7949312b2933e824e7af1bd26a1"
+  },
+  "external_services": {
+    "paid_model_calls": 0,
+    "real_search_calls": 0
+  },
+  "review": {
+    "fresh_read_only": true,
+    "critical": 0,
+    "important_found": 3,
+    "important_fixed_with_red_green": 3,
+    "minor_deferred": 0,
+    "fix_tests": "tests/integration/test_batch3_review_fixes.py"
+  },
+  "limits": [
+    "Real model and OCR quality not verified",
+    ">=10 groups of real sanitized materials are a future quality baseline",
+    "No Git repository; no commit or PR",
+    "Conservative explicit source labels; unconventional metadata remains needs_review"
+  ],
+  "warnings": [
+    "Upstream Starlette TestClient/httpx deprecation warning"
+  ]
+}

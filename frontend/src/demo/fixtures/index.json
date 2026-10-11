@@ -1,0 +1,181 @@
+{
+  "generated_at": "2026-10-04T13:07:05.107187+00:00",
+  "source": "scripts/export_frontend_fixtures.py（离线 fake 模型/搜索，无网络）",
+  "notice": "合成材料，用于前端离线演示与截图验收；不代表真实脱敏材料验收。",
+  "projects": [
+    {
+      "name": "合成示例：某市政工程施工总承包评标",
+      "project_id": "project_c0d1833a930742879ed16cc20ab70df2"
+    },
+    {
+      "name": "合成示例：某施工企业投标机会发现",
+      "project_id": "project_9b0dbacfd37c4ca8902fd5734f6e73b6"
+    }
+  ],
+  "bidders": [
+    {
+      "name": "Bid0",
+      "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+      "project_id": "project_c0d1833a930742879ed16cc20ab70df2"
+    },
+    {
+      "name": "Bid1",
+      "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+      "project_id": "project_c0d1833a930742879ed16cc20ab70df2"
+    }
+  ],
+  "documents": [
+    {
+      "document_id": "doc_2ea5907f5af843328f2bbd16589a993c",
+      "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+      "bidder_id": null,
+      "role": "announcement",
+      "status": "ready",
+      "format": ".md",
+      "parser": "md",
+      "chunk_count": 1,
+      "diagnostics": []
+    },
+    {
+      "document_id": "doc_8f03b762d92a4b75a6b6684837aaf6ae",
+      "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+      "bidder_id": null,
+      "role": "tender",
+      "status": "ready",
+      "format": ".md",
+      "parser": "md",
+      "chunk_count": 1,
+      "diagnostics": []
+    },
+    {
+      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+      "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+      "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+      "role": "bid",
+      "status": "ready",
+      "format": ".md",
+      "parser": "md",
+      "chunk_count": 1,
+      "diagnostics": []
+    },
+    {
+      "document_id": "doc_1c2e9b7b8c044a74b1549dc25a2303f3",
+      "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+      "bidder_id": "bidder_4bb6de1e694040cf8be853d1b2ed618b",
+      "role": "bid",
+      "status": "ready",
+      "format": ".md",
+      "parser": "md",
+      "chunk_count": 1,
+      "diagnostics": []
+    },
+    {
+      "document_id": "doc_bebf08fbe8584b4caae56f03542eb65f",
+      "project_id": "project_9b0dbacfd37c4ca8902fd5734f6e73b6",
+      "bidder_id": null,
+      "role": "profile",
+      "status": "ready",
+      "format": ".md",
+      "parser": "md",
+      "chunk_count": 1,
+      "diagnostics": []
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+      "type": "bid_evaluation",
+      "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+      "status": "succeeded",
+      "current_step": "report",
+      "completed_steps": [
+        "ingest",
+        "extract",
+        "assess",
+        "report"
+      ],
+      "known_steps": [
+        "ingest",
+        "extract",
+        "assess",
+        "report"
+      ],
+      "review_count": 0,
+      "revision": 18,
+      "result_stale": false,
+      "created_at": "2026-10-04T13:07:05.660436Z",
+      "updated_at": "2026-10-04T13:07:05.777575Z",
+      "report_id": "2"
+    },
+    {
+      "run_id": "run_3207d31122d04dd1aeb3ac9be7099525",
+      "type": "opportunity_discovery",
+      "project_id": "project_9b0dbacfd37c4ca8902fd5734f6e73b6",
+      "status": "succeeded",
+      "current_step": "report",
+      "completed_steps": [
+        "ingest",
+        "profile",
+        "search",
+        "assess",
+        "report"
+      ],
+      "known_steps": [
+        "ingest",
+        "profile",
+        "search",
+        "assess",
+        "report"
+      ],
+      "review_count": 0,
+      "revision": 15,
+      "result_stale": false,
+      "created_at": "2026-10-04T13:07:05.795579Z",
+      "updated_at": "2026-10-04T13:07:05.868133Z",
+      "report_id": "3"
+    }
+  ],
+  "reports": [
+    {
+      "report_id": "1",
+      "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+      "revision": 12,
+      "stale": true,
+      "confirmed": false
+    },
+    {
+      "report_id": "2",
+      "run_id": "run_2d17e0f2796140749ccf2d0215917b62",
+      "revision": 17,
+      "stale": false,
+      "confirmed": true
+    },
+    {
+      "report_id": "3",
+      "run_id": "run_3207d31122d04dd1aeb3ac9be7099525",
+      "revision": 14,
+      "stale": false,
+      "confirmed": true
+    }
+  ],
+  "companies": [
+    {
+      "company_id": "company_3207d31122d04dd1aeb3ac9be7099525",
+      "name": "企业",
+      "revision": 1,
+      "confirmed": true
+    }
+  ],
+  "gaps": [],
+  "statistics": {
+    "projects": 2,
+    "bidders": 2,
+    "documents": 5,
+    "runs": 2,
+    "reports": 3,
+    "companies": 1,
+    "evidence_matrix_refs": 4,
+    "generated_by": "scripts/export_frontend_fixtures.py（离线 fake 模型/搜索，无网络）",
+    "offline": true
+  }
+}

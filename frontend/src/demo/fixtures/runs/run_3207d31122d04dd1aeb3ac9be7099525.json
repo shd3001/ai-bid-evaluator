@@ -1,0 +1,688 @@
+{
+  "run": {
+    "run_id": "run_3207d31122d04dd1aeb3ac9be7099525",
+    "type": "opportunity_discovery",
+    "project_id": "project_9b0dbacfd37c4ca8902fd5734f6e73b6",
+    "status": "succeeded",
+    "current_step": "report",
+    "completed_steps": [
+      "ingest",
+      "profile",
+      "search",
+      "assess",
+      "report"
+    ],
+    "known_steps": [
+      "ingest",
+      "profile",
+      "search",
+      "assess",
+      "report"
+    ],
+    "cancel_requested": false,
+    "review_count": 0,
+    "revision": 15,
+    "result_stale": false,
+    "error": null,
+    "created_at": "2026-10-04T13:07:05.795579Z",
+    "updated_at": "2026-10-04T13:07:05.868133Z"
+  },
+  "events": [
+    {
+      "seq": 24,
+      "event": "created",
+      "revision": 1,
+      "at": "2026-10-04T13:07:05.795579Z",
+      "details": {}
+    },
+    {
+      "seq": 25,
+      "event": "claimed",
+      "revision": 2,
+      "at": "2026-10-04T13:07:05.799580Z",
+      "details": {}
+    },
+    {
+      "seq": 26,
+      "event": "step_started",
+      "revision": 3,
+      "at": "2026-10-04T13:07:05.802576Z",
+      "details": {
+        "step": "ingest",
+        "input_hash": "bac04ec4084518813a0bf4f204d333e54143cceffe4b307fd9475c472c50ef4b",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 27,
+      "event": "step_completed",
+      "revision": 4,
+      "at": "2026-10-04T13:07:05.806580Z",
+      "details": {
+        "step": "ingest"
+      }
+    },
+    {
+      "seq": 28,
+      "event": "step_started",
+      "revision": 5,
+      "at": "2026-10-04T13:07:05.809576Z",
+      "details": {
+        "step": "profile",
+        "input_hash": "492b7812afd65d10dbcc2321f0a736ca4a53c225e551327e437e2aa450897ff0",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 29,
+      "event": "model_call",
+      "revision": 5,
+      "at": "2026-10-04T13:07:05.814586Z",
+      "details": {
+        "task": "extract_profile",
+        "input_hash": "f414c6c1d0573cc2cf5d78a97cb31752cc2b1654098a6d07974e9726e61805cf",
+        "attempt": 1,
+        "usage": {},
+        "status": "succeeded",
+        "model": "bailian",
+        "prompt_version": "2",
+        "schema_version": "2"
+      }
+    },
+    {
+      "seq": 30,
+      "event": "awaiting_review",
+      "revision": 6,
+      "at": "2026-10-04T13:07:05.816578Z",
+      "details": {
+        "step": "profile"
+      }
+    },
+    {
+      "seq": 31,
+      "event": "review_applied",
+      "revision": 7,
+      "at": "2026-10-04T13:07:05.825576Z",
+      "details": {
+        "target_id": "profile"
+      }
+    },
+    {
+      "seq": 32,
+      "event": "claimed",
+      "revision": 8,
+      "at": "2026-10-04T13:07:05.832576Z",
+      "details": {}
+    },
+    {
+      "seq": 33,
+      "event": "step_started",
+      "revision": 9,
+      "at": "2026-10-04T13:07:05.835582Z",
+      "details": {
+        "step": "search",
+        "input_hash": "11e07638c7b5b606682a6f70d059fe48c805ec243f2406b96a998b8dddc27ccd",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 34,
+      "event": "step_completed",
+      "revision": 10,
+      "at": "2026-10-04T13:07:05.846591Z",
+      "details": {
+        "step": "search"
+      }
+    },
+    {
+      "seq": 35,
+      "event": "step_started",
+      "revision": 11,
+      "at": "2026-10-04T13:07:05.849589Z",
+      "details": {
+        "step": "assess",
+        "input_hash": "bcac69fece84ace6ff7264c4f99b75eceea8412f2907ae32736abb5e08cd7ce6",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 36,
+      "event": "model_call",
+      "revision": 11,
+      "at": "2026-10-04T13:07:05.854113Z",
+      "details": {
+        "task": "extract_opportunity_rules",
+        "input_hash": "1264acc3fe7eda9508879fc2ac3cd3d429ab4d2ae69545a3a7fbd40ca50f07c4",
+        "attempt": 1,
+        "usage": {},
+        "status": "succeeded",
+        "model": "bailian",
+        "prompt_version": "2",
+        "schema_version": "2"
+      }
+    },
+    {
+      "seq": 37,
+      "event": "model_call",
+      "revision": 11,
+      "at": "2026-10-04T13:07:05.858129Z",
+      "details": {
+        "task": "assess_opportunity",
+        "input_hash": "40285ccda91aee79a9d1dbd508429526f4ebe240a8afd4388f94b5e3ff666627",
+        "attempt": 1,
+        "usage": {},
+        "status": "succeeded",
+        "model": "bailian",
+        "prompt_version": "2",
+        "schema_version": "2"
+      }
+    },
+    {
+      "seq": 38,
+      "event": "step_completed",
+      "revision": 12,
+      "at": "2026-10-04T13:07:05.860123Z",
+      "details": {
+        "step": "assess"
+      }
+    },
+    {
+      "seq": 39,
+      "event": "step_started",
+      "revision": 13,
+      "at": "2026-10-04T13:07:05.863121Z",
+      "details": {
+        "step": "report",
+        "input_hash": "a5967467188ef99cc827344d2137336a807b5263e3585df4d040d3a73ffb4ece",
+        "model": "bailian",
+        "prompt": "2",
+        "schema": "2"
+      }
+    },
+    {
+      "seq": 40,
+      "event": "step_completed",
+      "revision": 14,
+      "at": "2026-10-04T13:07:05.865120Z",
+      "details": {
+        "step": "report"
+      }
+    },
+    {
+      "seq": 41,
+      "event": "succeeded",
+      "revision": 15,
+      "at": "2026-10-04T13:07:05.868133Z",
+      "details": {}
+    }
+  ],
+  "results": {
+    "run_id": "run_3207d31122d04dd1aeb3ac9be7099525",
+    "revision": 15,
+    "stale": false,
+    "confirmed": true,
+    "data": {
+      "assessments": [
+        {
+          "candidate_id": "c1",
+          "status": "suitable",
+          "score": "86.75",
+          "reasons": [],
+          "evidence": [
+            {
+              "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+              "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+              "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+              "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+              "page": null,
+              "sheet": null,
+              "row_start": null,
+              "row_end": null,
+              "column_start": null,
+              "column_end": null
+            }
+          ],
+          "checks": [
+            {
+              "rule_id": "q1",
+              "status": "passed",
+              "mandatory": true,
+              "evidence": [
+                {
+                  "document_id": "doc_bebf08fbe8584b4caae56f03542eb65f",
+                  "document_hash": "c2804f4a6139b449879342f3214d9e6f8a3c7861a2407440306cb09dd1e2ad7a",
+                  "chunk_id": "chunk_7ee272e9398d4ed4e265ca622978cdb1c55a784227e42538",
+                  "quote": "企业持有施工资质",
+                  "page": null,
+                  "sheet": null,
+                  "row_start": null,
+                  "row_end": null,
+                  "column_start": null,
+                  "column_end": null
+                }
+              ],
+              "reason": ""
+            }
+          ]
+        }
+      ],
+      "legacy_results": [
+        {
+          "candidate_id": "c1",
+          "suitability_status": "适合投标",
+          "suitability_score": "86.75",
+          "manual_review_points": [],
+          "review_points": [],
+          "evidence": [
+            {
+              "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+              "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+              "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+              "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+              "page": null,
+              "sheet": null,
+              "row_start": null,
+              "row_end": null,
+              "column_start": null,
+              "column_end": null
+            }
+          ]
+        }
+      ],
+      "candidate_rules": {
+        "c1": [
+          {
+            "rule_id": "q1",
+            "title": "施工资质",
+            "kind": "qualification",
+            "mandatory": true,
+            "confirmed": false,
+            "max_score": "0",
+            "operation": "manual",
+            "parameters": {},
+            "children": [],
+            "evidence": [
+              {
+                "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+                "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+                "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+                "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+                "page": null,
+                "sheet": null,
+                "row_start": null,
+                "row_end": null,
+                "column_start": null,
+                "column_end": null
+              }
+            ]
+          }
+        ]
+      },
+      "source_diagnostics": [
+        {
+          "provider": "offline",
+          "status": "succeeded",
+          "count": 1
+        }
+      ],
+      "candidate_notices": {
+        "c1": {
+          "notice_id": "notice_3ed52131150ad6c107f3b2d82ae82333",
+          "title": "招标公告",
+          "url": "https://example.invalid/Notice?ID=AbC",
+          "notice_type": "tender",
+          "deadline": "2099-10-04T09:30:00+08:00",
+          "budget": "1000000",
+          "region": "江苏",
+          "providers": [
+            "offline"
+          ],
+          "project_number": "P-1",
+          "lot_id": "L-1",
+          "related_notice_id": null,
+          "evidence": [
+            {
+              "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+              "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+              "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+              "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+              "page": null,
+              "sheet": null,
+              "row_start": null,
+              "row_end": null,
+              "column_start": null,
+              "column_end": null
+            }
+          ],
+          "diagnostics": []
+        }
+      },
+      "confirmed": true
+    },
+    "evidence_matrix": [
+      {
+        "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+        "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+        "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+        "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+        "page": null,
+        "sheet": null,
+        "row_start": null,
+        "row_end": null,
+        "column_start": null,
+        "column_end": null
+      },
+      {
+        "document_id": "doc_bebf08fbe8584b4caae56f03542eb65f",
+        "document_hash": "c2804f4a6139b449879342f3214d9e6f8a3c7861a2407440306cb09dd1e2ad7a",
+        "chunk_id": "chunk_7ee272e9398d4ed4e265ca622978cdb1c55a784227e42538",
+        "quote": "企业持有施工资质",
+        "page": null,
+        "sheet": null,
+        "row_start": null,
+        "row_end": null,
+        "column_start": null,
+        "column_end": null
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "review_id": "3",
+      "kind": "history",
+      "target_id": "profile",
+      "revision": 7,
+      "payload": {
+        "decision": "confirm",
+        "target_id": "profile",
+        "patch": {},
+        "reason": "人工确认企业画像与引用证据",
+        "actor": "local_user",
+        "expected_version": 6,
+        "before": {
+          "company_id": "company_3207d31122d04dd1aeb3ac9be7099525",
+          "name": "企业",
+          "revision": 1,
+          "confirmed": false,
+          "industry": "",
+          "qualifications": [
+            "施工资质"
+          ],
+          "evidence": [
+            {
+              "document_id": "doc_bebf08fbe8584b4caae56f03542eb65f",
+              "document_hash": "c2804f4a6139b449879342f3214d9e6f8a3c7861a2407440306cb09dd1e2ad7a",
+              "chunk_id": "chunk_7ee272e9398d4ed4e265ca622978cdb1c55a784227e42538",
+              "quote": "企业持有施工资质",
+              "page": null,
+              "sheet": null,
+              "row_start": null,
+              "row_end": null,
+              "column_start": null,
+              "column_end": null
+            }
+          ]
+        },
+        "after": {
+          "company_id": "company_3207d31122d04dd1aeb3ac9be7099525",
+          "name": "企业",
+          "revision": 1,
+          "confirmed": true,
+          "industry": "",
+          "qualifications": [
+            "施工资质"
+          ],
+          "evidence": [
+            {
+              "document_id": "doc_bebf08fbe8584b4caae56f03542eb65f",
+              "document_hash": "c2804f4a6139b449879342f3214d9e6f8a3c7861a2407440306cb09dd1e2ad7a",
+              "chunk_id": "chunk_7ee272e9398d4ed4e265ca622978cdb1c55a784227e42538",
+              "quote": "企业持有施工资质",
+              "page": null,
+              "sheet": null,
+              "row_start": null,
+              "row_end": null,
+              "column_start": null,
+              "column_end": null
+            }
+          ]
+        },
+        "at": "2026-10-04T13:07:05.825576+00:00",
+        "source_revision": 6,
+        "revision": 7
+      }
+    }
+  ],
+  "reports": [
+    {
+      "report_id": "3",
+      "run_id": "run_3207d31122d04dd1aeb3ac9be7099525",
+      "revision": 14,
+      "stale": false,
+      "confirmed": true,
+      "data": {
+        "opportunity_ranking": [
+          {
+            "candidate_id": "c1",
+            "title": "招标公告",
+            "url": "https://example.invalid/Notice?ID=AbC",
+            "suitability_status": "适合投标",
+            "suitability_score": "86.75",
+            "manual_review_points": [],
+            "review_points": [],
+            "evidence": [
+              {
+                "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+                "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+                "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+                "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+                "page": null,
+                "sheet": null,
+                "row_start": null,
+                "row_end": null,
+                "column_start": null,
+                "column_end": null
+              }
+            ],
+            "requirement_assessments": [],
+            "strengths": [],
+            "weaknesses": [],
+            "key_factors": []
+          }
+        ],
+        "recommended_opportunities": [
+          {
+            "candidate_id": "c1",
+            "title": "招标公告",
+            "url": "https://example.invalid/Notice?ID=AbC",
+            "suitability_status": "适合投标",
+            "suitability_score": "86.75",
+            "manual_review_points": [],
+            "review_points": [],
+            "evidence": [
+              {
+                "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+                "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+                "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+                "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+                "page": null,
+                "sheet": null,
+                "row_start": null,
+                "row_end": null,
+                "column_start": null,
+                "column_end": null
+              }
+            ],
+            "requirement_assessments": [],
+            "strengths": [],
+            "weaknesses": [],
+            "key_factors": []
+          }
+        ],
+        "not_recommended": [],
+        "manual_review": [],
+        "confirmed": true,
+        "source_diagnostics": [
+          {
+            "provider": "offline",
+            "status": "succeeded",
+            "count": 1
+          }
+        ],
+        "notices": {
+          "c1": {
+            "notice_id": "notice_3ed52131150ad6c107f3b2d82ae82333",
+            "title": "招标公告",
+            "url": "https://example.invalid/Notice?ID=AbC",
+            "notice_type": "tender",
+            "deadline": "2099-10-04T09:30:00+08:00",
+            "budget": "1000000",
+            "region": "江苏",
+            "providers": [
+              "offline"
+            ],
+            "project_number": "P-1",
+            "lot_id": "L-1",
+            "related_notice_id": null,
+            "evidence": [
+              {
+                "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+                "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+                "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+                "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+                "page": null,
+                "sheet": null,
+                "row_start": null,
+                "row_end": null,
+                "column_start": null,
+                "column_end": null
+              }
+            ],
+            "diagnostics": []
+          }
+        },
+        "as_of": "2026-10-04T13:07:05.865120+00:00"
+      }
+    }
+  ],
+  "report_details": {
+    "3": {
+      "report_id": "3",
+      "run_id": "run_3207d31122d04dd1aeb3ac9be7099525",
+      "revision": 14,
+      "stale": false,
+      "confirmed": true,
+      "data": {
+        "opportunity_ranking": [
+          {
+            "candidate_id": "c1",
+            "title": "招标公告",
+            "url": "https://example.invalid/Notice?ID=AbC",
+            "suitability_status": "适合投标",
+            "suitability_score": "86.75",
+            "manual_review_points": [],
+            "review_points": [],
+            "evidence": [
+              {
+                "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+                "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+                "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+                "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+                "page": null,
+                "sheet": null,
+                "row_start": null,
+                "row_end": null,
+                "column_start": null,
+                "column_end": null
+              }
+            ],
+            "requirement_assessments": [],
+            "strengths": [],
+            "weaknesses": [],
+            "key_factors": []
+          }
+        ],
+        "recommended_opportunities": [
+          {
+            "candidate_id": "c1",
+            "title": "招标公告",
+            "url": "https://example.invalid/Notice?ID=AbC",
+            "suitability_status": "适合投标",
+            "suitability_score": "86.75",
+            "manual_review_points": [],
+            "review_points": [],
+            "evidence": [
+              {
+                "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+                "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+                "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+                "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+                "page": null,
+                "sheet": null,
+                "row_start": null,
+                "row_end": null,
+                "column_start": null,
+                "column_end": null
+              }
+            ],
+            "requirement_assessments": [],
+            "strengths": [],
+            "weaknesses": [],
+            "key_factors": []
+          }
+        ],
+        "not_recommended": [],
+        "manual_review": [],
+        "confirmed": true,
+        "source_diagnostics": [
+          {
+            "provider": "offline",
+            "status": "succeeded",
+            "count": 1
+          }
+        ],
+        "notices": {
+          "c1": {
+            "notice_id": "notice_3ed52131150ad6c107f3b2d82ae82333",
+            "title": "招标公告",
+            "url": "https://example.invalid/Notice?ID=AbC",
+            "notice_type": "tender",
+            "deadline": "2099-10-04T09:30:00+08:00",
+            "budget": "1000000",
+            "region": "江苏",
+            "providers": [
+              "offline"
+            ],
+            "project_number": "P-1",
+            "lot_id": "L-1",
+            "related_notice_id": null,
+            "evidence": [
+              {
+                "document_id": "doc_cfe5f948f8dc41e8afa01110e78b19ba",
+                "document_hash": "112eb660bde4d9a1c55e953336cad9a1be45b20143d34e9c025dd752701bca0a",
+                "chunk_id": "chunk_a5fa931af9221d28a0891cf53ecbeadae1d7d5df6ee80bb5",
+                "quote": "招标公告\n投标截止时间：2099-10-04 09:30\n项目地区：江苏\n预算金额：100万元\n项目编号：P-1\n标段编号：L-1\n需要施工资质",
+                "page": null,
+                "sheet": null,
+                "row_start": null,
+                "row_end": null,
+                "column_start": null,
+                "column_end": null
+              }
+            ],
+            "diagnostics": []
+          }
+        },
+        "as_of": "2026-10-04T13:07:05.865120+00:00"
+      }
+    }
+  }
+}

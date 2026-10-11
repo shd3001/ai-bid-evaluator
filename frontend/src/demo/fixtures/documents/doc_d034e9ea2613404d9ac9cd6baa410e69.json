@@ -1,0 +1,42 @@
+{
+  "document": {
+    "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+    "project_id": "project_c0d1833a930742879ed16cc20ab70df2",
+    "bidder_id": "bidder_6fd24f5f16344a359c530e7194dc51a5",
+    "role": "bid",
+    "status": "ready",
+    "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+    "diagnostics": [],
+    "format": ".md",
+    "parser": "md",
+    "chunk_count": 1
+  },
+  "chunks": [
+    {
+      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+      "chunk_id": "chunk_2903d40be51201e957594fc7d334106cb64499ae596f27ec",
+      "text": "BidA 施工资质有效，技术方案",
+      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    },
+    {
+      "document_id": "doc_d034e9ea2613404d9ac9cd6baa410e69",
+      "chunk_id": "doc_d034e9ea2613404d9ac9cd6baa410e69_1",
+      "text": "BidA 施工资质有效，技术方案",
+      "document_hash": "73e9a732baf1589f7561861144220ffcfb6b5a38d7b0630fc85aaba7136f8463",
+      "page": null,
+      "sheet": null,
+      "row_start": null,
+      "row_end": null,
+      "column_start": null,
+      "column_end": null,
+      "quality": "good"
+    }
+  ]
+}
