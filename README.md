@@ -4,17 +4,16 @@
 
 **两条业务链均可经 API 上传、提交、复核并读取结果与报告。** 项目历史、持久进度、证据块、企业画像及报告导出已提供；CLI 保持兼容。React 评审台已实现，并完成第五阶段本地联调。见 [前端说明](frontend/README.md)、[第五阶段验收与启动指南](docs/phase-5-acceptance.md)及[后端 API 文档](docs/backend-api.md)。
 
-## 安装与离线验证
+## 安装
 
 验证基线：Windows、Python 3.11；`requirements-lock.txt` 锁定直接及传递依赖。现有 `.venv311` 已安装并通过测试。新环境：
 
 ```powershell
 py -3.11 -m venv .venv311
-.venv311\Scripts\python.exe -m pip install -r requirements-dev.txt
-.venv311\Scripts\python.exe -m pytest -q
+.venv311\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-测试使用假模型、假搜索和临时数据库，不读取真实模型额度。`tests/smoke_llm.py`、`tests/e2e_offline.py` 是旧的**真实模型测试脚本**（后者只模拟搜索），不要把它们当离线验收命令。
+测试文件、前端验收工具及临时产物已按要求移除。历史验收结果保留在文档中；清理前的前端验收工具可从 Git 提交 `1629f92` 恢复，该提交不包含更早已删除的 `tests/` 目录。运行依赖、真实业务数据与前端内置演示数据保留。
 
 ## 启动 API 与 worker
 

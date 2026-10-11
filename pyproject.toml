@@ -15,9 +15,6 @@ dependencies = [
   "markitdown==0.1.6", "pdfplumber==0.11.10", "pypdfium2==5.10.1",
 ]
 
-[project.optional-dependencies]
-dev = ["pytest==9.1.1"]
-
 [project.scripts]
 bid-worker = "ai_bid_evaluator.worker.main:main"
 bid-import = "ai_bid_evaluator.infrastructure.import_legacy:main"
@@ -25,6 +22,3 @@ bid-import = "ai_bid_evaluator.infrastructure.import_legacy:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["src"]

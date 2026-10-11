@@ -8,8 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "fixtures": "\"..\\.venv311\\Scripts\\python.exe\" \"..\\scripts\\export_frontend_fixtures.py\""
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "react": "19.3.0",

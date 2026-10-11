@@ -1,2 +1,0 @@
--r requirements-lock.txt
--e .[dev]
