@@ -1,0 +1,18 @@
+# 构建上下文收敛：镜像里不需要本机环境、业务数据和密钥。
+.git
+.gitignore
+.idea
+.design-studio
+.venv
+.venv311
+data
+docs
+.env
+*.db
+*.db-wal
+*.db-shm
+**/__pycache__
+**/*.pyc
+frontend/node_modules
+frontend/dist
+verify_*.txt

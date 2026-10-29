@@ -5,6 +5,8 @@
   "type": "module",
   "description": "招投标辅助评审台 —— React + TypeScript 前端（离线构建）",
   "scripts": {
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "test:browser": "node tests/browser-flow.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

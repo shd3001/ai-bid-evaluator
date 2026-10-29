@@ -15,7 +15,8 @@ import {
 import { DetailList } from "../components/layout";
 import { useAsync } from "../utils/useAsync";
 import { shortId } from "../utils/format";
-import { href } from "../utils/router";
+import { href, useQuery } from "../utils/router";
+import { useJourney, refreshJourney } from '../app/journey';
 
 type ExportFormat = "json" | "markdown" | "html";
 
@@ -28,6 +29,8 @@ const FORMATS: Array<{ id: ExportFormat; label: string; hint: string }> = [
 export function ReportView({ runId }: { runId: string }) {
   const { api, mode } = useSession();
   const { push } = useToast();
+  const query = useQuery();
+  const journey = useJourney();
   const [selected, setSelected] = useState<string | null>(null);
   const [format, setFormat] = useState<ExportFormat>("json");
   const [exporting, setExporting] = useState(false);
@@ -36,16 +39,17 @@ export function ReportView({ runId }: { runId: string }) {
 
   const list = useAsync(() => api.listReports(runId, { limit: 20 }), [api, runId]);
   const reports = list.data?.items ?? [];
-  const activeId = selected ?? reports[0]?.report_id ?? null;
+  const activeId = selected ?? query.get('report_id') ?? journey.flow?.reportId ?? null;
   const detail = useAsync(() => (activeId === null ? null : api.getReport(activeId)), [api, activeId]);
 
   const report: ReportResponse | null = detail.data ?? null;
   const blocked = useMemo(() => {
     if (!report) return null;
+    if (report.run_id !== runId) return '报告不属于当前运行，请重新选择。';
     if (report.stale) return "报告已过期（stale=true）：材料或评分在报告生成后发生了变化，后端会拒绝导出。";
     if (!report.confirmed) return "报告尚未确认：先完成人工复核，再导出。";
     return null;
-  }, [report]);
+  }, [report, runId]);
 
   const doExport = async (): Promise<void> => {
     if (!activeId || blocked) return;
@@ -73,6 +77,7 @@ export function ReportView({ runId }: { runId: string }) {
         });
         detail.reload();
         list.reload();
+        refreshJourney();
       }
     } finally {
       setExporting(false);
@@ -106,6 +111,9 @@ export function ReportView({ runId }: { runId: string }) {
           <a className="btn btn--default" href={href(`/runs/${runId}/review`)}>
             人工复核
           </a>
+          <a className="btn btn--default" href={href(`/runs/${runId}/conclusion`)}>
+            结论评审卷
+          </a>
         </div>
       </header>
 
@@ -114,7 +122,7 @@ export function ReportView({ runId }: { runId: string }) {
         title="报告清单"
         description="同一个运行可以有多份报告；每份对应一个 revision。"
         actions={
-          <Button size="sm" variant="ghost" onClick={list.reload} busy={list.loading}>
+          <Button size="sm" variant="ghost" onClick={() => { list.reload(); refreshJourney(); }} busy={list.loading}>
             刷新
           </Button>
         }

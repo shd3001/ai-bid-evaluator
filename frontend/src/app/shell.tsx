@@ -5,6 +5,7 @@ import { href, type RouteMatch } from "../utils/router";
 import { useSession, useToast } from "./session";
 import { Button, CopyId, StatusFlag } from "../components/core";
 import { applyTheme, nextThemeChoice, readThemeChoice, setThemeChoice, THEME_LABEL, type ThemeChoice } from "../utils/theme";
+import { useJourney, journeyHref, JourneyBreadcrumbs } from './journey';
 
 /* ---------------- 错误边界：任何渲染异常都不能把整页变成白屏 ---------------- */
 
@@ -70,30 +71,22 @@ const STEPS: Array<{ step: 1 | 2 | 3 | 4 | 5; label: string; note: string }> = [
   { step: 5, label: "报告", note: "确认与导出" },
 ];
 
-function stepHref(step: number, route: RouteMatch): string | null {
-  const projectId = route.params.projectId ?? null;
-  const runId = route.params.runId ?? null;
-  if (step === 1) return href("/projects");
-  if (step === 2) return projectId ? href(`/projects/${projectId}/upload`) : null;
-  if (step === 3) return runId ? href(`/runs/${runId}`) : null;
-  if (step === 4) return runId ? href(`/runs/${runId}/review`) : null;
-  if (step === 5) return runId ? href(`/runs/${runId}/report`) : null;
-  return null;
-}
-
 export function PhaseRail({ route }: { route: RouteMatch }) {
-  const active = route.phase ?? 0;
+  const { flow, error } = useJourney();
+  const active = route.name === 'documents' ? 2 : route.phase ?? 0;
   return (
     <nav className="phaserail" aria-label="评审流程">
       <ol className="phaserail__list">
         {STEPS.map((item) => {
-          const target = stepHref(item.step, route);
-          const state = item.step === active ? "current" : item.step < active ? "done" : "todo";
+          const available = !error && (flow?.available.includes(item.step) || (route.name === 'runNew' && item.step === 3));
+          const target = flow && available ? journeyHref(flow, item.step) : item.step === 1 ? href('/projects') : null;
+          const done = flow?.completed.includes(item.step) ?? false;
+          const state = item.step === active ? "current" : done ? "done" : target ? "available" : "todo";
           const body = (
             <>
-              <span className="phase__num ledger-num">{item.step}</span>
+              <span className="phase__num ledger-num" aria-label={done ? '已完成' : undefined}>{done ? '✓' : item.step}</span>
               <span className="phase__label">{item.label}</span>
-              <span className="phase__note micro">{item.note}</span>
+              <span className="phase__note micro">{item.step === 4 && flow ? flow.reviewLabel : item.note}</span>
             </>
           );
           return (
@@ -103,7 +96,7 @@ export function PhaseRail({ route }: { route: RouteMatch }) {
                   {body}
                 </a>
               ) : (
-                <span className="phase__link phase__link--inert" title="先进入一个运行（run）才能到这里">
+                <span className="phase__link phase__link--inert" aria-disabled="true" title="请先完成前面的步骤，再继续此阶段">
                   {body}
                 </span>
               )}
@@ -182,6 +175,15 @@ export function TopBar({ route }: { route: RouteMatch }) {
           <a className={cx("topnav__link", route.name === "opportunity" && "is-active")} href={href("/opportunity")}>
             机会筛选
           </a>
+
+          {route.params.runId ? (
+            <a
+              className={cx("topnav__link", route.name === "conclusion" && "is-active")}
+              href={href(`/runs/${route.params.runId}/conclusion`)}
+            >
+              结论评审卷
+            </a>
+          ) : null}
           <a className={cx("topnav__link", route.name === "about" && "is-active")} href={href("/about")}>
             关于
           </a>
@@ -269,7 +271,7 @@ export function AppShell({
       ) : null}
       <PhaseRail route={route} />
       <div className={cx("page", aside && "page--split")} id="main">
-        <main className="page__main">{children}</main>
+        <main className="page__main"><JourneyBreadcrumbs route={route} />{children}</main>
         {aside ? <div className="page__aside">{aside}</div> : null}
       </div>
       <footer className="footer">

@@ -111,7 +111,7 @@ export function UploadView({ projectId }: { projectId: string }) {
             回项目
           </a>
           <a className="btn btn--primary" href={href("/runs/new", { project_id: projectId })}>
-            发起评审
+            下一步：发起评审
           </a>
         </div>
       </header>

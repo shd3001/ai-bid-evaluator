@@ -31,6 +31,57 @@ py -3.11 -m venv .venv311
 - `--once` 执行一个可运行任务后退出；`--database sqlite:///...` 可指定数据库。
 - API 与 worker 必须使用同一 `DATABASE_URL`；`data/backend.db` 是默认本机库。多机共享 SQLite 不在首版范围。
 
+## 日志与停机
+
+- 默认每条日志一行 JSON 输出到 stdout（`journalctl -o cat` 或日志采集可直接解析）：`ts/level/service/logger/msg` 加业务字段。`service` 区分 `api` 与 `worker`。
+- 每个请求带 `request_id`：可用 `X-Request-ID` 传入（仅 `[A-Za-z0-9_-]`、≤100 字符），否则生成，并回写到响应头；同一请求内的错误日志带相同 ID。worker 的日志带 `run_id`。
+- 未处理异常记 `unhandled_error` 并保留完整堆栈；4xx 只记 `code`/`status`/字段名。不打印请求体、提示词、密钥或正文。`httpx` 默认只记告警，排查上游问题时设 `LOG_HTTPX_LEVEL=INFO`。
+- 环境变量：`LOG_LEVEL`（默认 `INFO`）、`LOG_FORMAT`（`json` 默认，`text` 便于本机终端）、`LOG_UVICORN_ACCESS_LEVEL`（默认 `WARNING`，访问日志已由请求中间件输出，避免重复）。
+- worker 收到 `SIGTERM`/`SIGINT`/`SIGBREAK` 后先取消执行中的任务：不写失败、不写检查点，保留租约，由下一个 worker 在租约到期后续跑；随后关闭模型客户端和数据库再退出。`--once` 不受影响。
+- Windows 控制台请用 `CTRL_BREAK` 停机（`CTRL_C` 对新进程组默认禁用，直接关窗口是强制终止）；Linux 用 `kill`/`SIGTERM`。
+- 改动日志或停机逻辑后运行自检：`.\.venv311\Scripts\python.exe scripts\verify_observability.py`（8 项，含真实子进程停机验证）。
+
+## Docker 部署（单机）
+
+仓库自带 `Dockerfile`（多阶段：前端构建 → 后端运行时 → nginx 静态站点）、`docker-compose.yml`、`deploy/nginx.conf` 和 `.env.docker.example`。拓扑是 `web(nginx) → api`，`worker` 独立进程，`migrate` 一次性建表；SQLite 与运行产物都在 `bid-data` 卷的 `/app/data` 下。
+
+**前置**：Windows 上装好 Docker Desktop 并启用 WSL2 后端，确认 `docker version` 能打印 Server 段。只有客户端、daemon 没起来时会报 `failed to connect ... npipe:////./pipe/dockerDesktopLinuxEngine`。
+
+```powershell
+# 1) 配置环境变量（已有 .env 可跳过，compose 会自动读取；.env 已被 .dockerignore 排除，不进镜像）
+Copy-Item .env.docker.example .env
+# 编辑 .env 填 DASHSCOPE_API_KEY / SEARCH_API_KEY
+
+# 2) 构建镜像（首次要拉基础镜像并装依赖，几分钟）
+docker compose build
+
+# 3) 启动：migrate 建表成功后才起 api/worker，api 通过健康检查后才起 web
+docker compose up -d
+docker compose ps
+```
+
+- 前端入口 `http://localhost:8080`；API 文档 `http://localhost:8080/docs`；反代探活 `http://localhost:8080/healthz`。
+- `api` 额外把 `127.0.0.1:8000` 映射到宿主机，只供本机排查，不要对外暴露。
+- 首次启动 `bid-data` 是空卷：只建表，不会自动带入本机 `data/` 里的开发数据；要带旧数据就把本机 `data/` 拷进卷。
+- 容器内直连 `pypi.org` 常常超时（表现为 `Connection to pypi.org timed out` 后 `No matching distribution found`）；`Dockerfile` 已默认用阿里云 pip 镜像，能直连 pypi 的环境可覆盖：`docker compose build --build-arg PIP_INDEX_URL=https://pypi.org/simple`。
+- PowerShell 里 docker 把构建进度写到 stderr，`docker compose up` 可能看起来 `exit code: 1`；以 `docker compose ps` 的状态和 `/healthz` 为准。
+- 日志：`docker compose logs -f api worker`（JSON 一行一条；本地调试可临时设 `LOG_FORMAT=text`）。
+- 停机：`docker compose down`。worker 收 `SIGTERM` 会取消在跑任务、保留租约再退出（`stop_grace_period: 90s`），下次启动续跑。
+- 升级：改完代码 `docker compose build && docker compose up -d`；数据在卷里，不受影响。
+- 备份（PowerShell，先算好卷名，默认带项目前缀）：
+
+```powershell
+docker run --rm -v ai-bid-evaluator_bid-data:/data -v ${PWD}:/backup alpine `
+  tar czf /backup/bid-data-$(Get-Date -Format yyyyMMdd-HHmmss).tgz -C /data .
+```
+
+**约束与注意**
+
+- 只支持单机 SQLite：不要对 `api`/`worker` 做 `--scale`，也不要挂 NFS/多机共享 `data`；需要多机时先改 PostgreSQL。
+- `api` 没有身份认证，`8080` 仅限内网；要公网访问必须前置 HTTPS 反向代理（Caddy/Nginx）并自行补认证。
+- 上传上限：后端 50MiB、nginx 64m；`proxy_read_timeout 300s` 覆盖大文档解析与模型等待。
+- 模型与搜索 API 按量计费：只要提交真实任务就会产生调用，`BAILIAN_RETRY_COUNT` 的重试同样计费。
+
 ## 两个兼容 CLI 入口
 
 原有 JSON 输入文件仍可使用；解析使用本地统一摄取，不再依赖百炼文件上传成功。文档 ID 和 bidder_id 由服务生成，显示名称不用于路径和结果关联。

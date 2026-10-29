@@ -2099,3 +2099,21 @@
     color: var(--seal-ink);
   }
 }
+@layer components {
+  .breadcrumbs { display: flex; align-items: center; gap: var(--sp-2); min-width: 0; margin-bottom: var(--sp-4); color: var(--ink-3); font-size: var(--fs-xs); }
+  .breadcrumbs a { color: var(--seal-ink); }
+  .breadcrumbs__project { min-width: 0; max-width: 32ch; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .breadcrumbs > :not(.breadcrumbs__project) { flex-shrink: 0; }
+  .journey-notice { padding: var(--sp-3) var(--sp-4); border-left: 3px solid var(--seal); background: var(--seal-weak); margin-bottom: var(--sp-4); }
+  .phase--available .phase__link { color: var(--ink-2); }
+  .project-card { flex-wrap: wrap; }
+  .project-card__name { flex: 1 1 200px; overflow-wrap: anywhere; }
+  .project-card .btn { margin-left: auto; }
+  @media (max-width: 640px) {
+    .phaserail { overflow-x: auto; }
+    .phaserail__list { width: max-content; min-width: 100%; }
+    .phaserail .phase { flex: 0 0 auto; }
+    .breadcrumbs__project { max-width: 40vw; }
+    .project-card__meta { flex-basis: 100%; }
+  }
+}

@@ -21,6 +21,7 @@ export const ROUTES: Route[] = [
   { name: "runNew", pattern: "/runs/new", title: "发起评审", phase: 3 },
   { name: "run", pattern: "/runs/:runId", title: "评审进度", phase: 3 },
   { name: "review", pattern: "/runs/:runId/review", title: "人工复核", phase: 4 },
+  { name: "conclusion", pattern: "/runs/:runId/conclusion", title: "结论评审卷", phase: 4 },
   { name: "report", pattern: "/runs/:runId/report", title: "评审报告", phase: 5 },
   { name: "opportunity", pattern: "/opportunity", title: "机会筛选", phase: 1 },
   { name: "about", pattern: "/about", title: "关于与离线说明" },

@@ -141,10 +141,11 @@ export function RunCreateView() {
               </div>
             </fieldset>
 
-            <Labeled label="project_id" required hint="要评审的项目。可从项目页复制。">
+            <Labeled label="project_id" required hint={projectIdFromQuery ? '当前项目已固定；如需切换，请返回项目台选择其他项目。' : '要评审的项目。可从项目页复制。'}>
               <input
                 className="input mono"
                 value={projectId}
+                readOnly={Boolean(projectIdFromQuery)}
                 onChange={(event) => setProjectId(event.target.value)}
                 placeholder="project_id"
                 required

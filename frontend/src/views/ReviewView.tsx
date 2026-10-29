@@ -16,7 +16,8 @@ import { EvidenceTenonRow } from "../components/evidence";
 import { Labeled, Pagination, Tabs } from "../components/layout";
 import { useAsync } from "../utils/useAsync";
 import { REVIEW_DECISION_LABEL, formatDateTime } from "../utils/format";
-import { href } from "../utils/router";
+import { href, navigate } from "../utils/router";
+import { refreshJourney, useJourney, journeyHref } from '../app/journey';
 import { clearIdempotencyKey, idempotencyKey } from "../utils/idempotency";
 
 type DecisionKind = ReviewDecision["decision"];
@@ -39,6 +40,7 @@ interface DecisionState {
 export function ReviewView({ runId }: { runId: string }) {
   const { api, mode } = useSession();
   const { push } = useToast();
+  const journey = useJourney();
   const [tab, setTab] = useState<"pending" | "history">("pending");
   const [pageIndex, setPageIndex] = useState(0);
   const [cursors, setCursors] = useState<string[]>([]);
@@ -118,7 +120,8 @@ export function ReviewView({ runId }: { runId: string }) {
         message: `已提交复核：${REVIEW_DECISION_LABEL[response.decision] ?? response.decision}`,
         detail: `review_id ${response.review_id} · 运行版本 ${response.run.revision ?? "?"}`,
       });
-      list.reload();
+      refreshJourney();
+      navigate(`/runs/${encodeURIComponent(runId)}`);
     } catch (cause) {
       setFormError({ id: item.review_id, error: cause });
       if (cause instanceof ApiError && cause.isConflict) {
@@ -151,9 +154,12 @@ export function ReviewView({ runId }: { runId: string }) {
           <a className="btn btn--default" href={href(`/runs/${runId}`)}>
             回进度页
           </a>
-          <a className="btn btn--primary" href={href(`/runs/${runId}/report`)}>
-            看报告
+          <a className="btn btn--default" href={href(`/runs/${runId}/conclusion`)}>
+            结论评审卷
           </a>
+          {journey.flow?.available.includes(5) && !journey.error ? <a className="btn btn--primary" href={journeyHref(journey.flow, 5)}>
+            看报告
+          </a> : null}
         </div>
       </header>
 

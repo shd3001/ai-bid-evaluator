@@ -11,8 +11,10 @@ import { ErrorNotice } from "../components/core";
 import { probeMode, type ModeProbe } from "../api/mode";
 import type { DemoResolver } from "../api/client";
 import { createDemoClient } from "../api/demo-source";
-import { useRoute } from "../utils/router";
+import { useRoute, useQuery } from "../utils/router";
+import { JourneyProvider } from './journey';
 import { AboutView, NotFoundView } from "../views/AboutView";
+import { ConclusionDossierView } from "../views/ConclusionDossierView";
 import { DocumentView } from "../views/DocumentView";
 import { OpportunityView } from "../views/OpportunityView";
 import { ProjectDetailView } from "../views/ProjectDetailView";
@@ -77,12 +79,14 @@ export function App({ probe, demo: preset }: { probe: ModeProbe; demo?: DemoReso
 
 function Shell() {
   const route = useRoute();
+  const query = useQuery();
   const { api, mode } = useSession();
   const { focus } = useEvidenceFocus();
 
   return (
+    <JourneyProvider key={`${route.path}?${query.toString()}`} route={route}>
     <AppShell route={route}>
-      <RouteView route={route} />
+      <RouteView key={route.path} route={route} />
       {focus ? <EvidenceDrawer api={api} /> : null}
       {mode === "demo" ? (
         <p className="sr-only" role="status">
@@ -90,6 +94,7 @@ function Shell() {
         </p>
       ) : null}
     </AppShell>
+    </JourneyProvider>
   );
 }
 
@@ -110,6 +115,8 @@ function RouteView({ route }: { route: ReturnType<typeof useRoute> }) {
       return params.runId ? <RunView runId={params.runId} /> : <NotFoundView />;
     case "review":
       return params.runId ? <ReviewView runId={params.runId} /> : <NotFoundView />;
+    case "conclusion":
+      return params.runId ? <ConclusionDossierView runId={params.runId} /> : <NotFoundView />;
     case "report":
       return params.runId ? <ReportView runId={params.runId} /> : <NotFoundView />;
     case "opportunity":

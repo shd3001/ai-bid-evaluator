@@ -26,10 +26,12 @@ import {
 } from "../utils/format";
 import { href, navigate } from "../utils/router";
 import { clearIdempotencyKey, idempotencyKey } from "../utils/idempotency";
+import { useJourney, refreshJourney, journeyHref } from '../app/journey';
 
 export function RunView({ runId }: { runId: string }) {
   const { api } = useSession();
   const { push } = useToast();
+  const journey = useJourney();
   const [acting, setActing] = useState<"retry" | "cancel" | null>(null);
   const [actionError, setActionError] = useState<unknown>(null);
 
@@ -58,6 +60,7 @@ export function RunView({ runId }: { runId: string }) {
         detail: `状态 ${updated.status ?? "pending"} · 版本 ${updated.revision ?? version}`,
       });
       setStopPolling(false);
+      refreshJourney();
       polling.refresh();
     } catch (cause) {
       setActionError(cause);
@@ -101,7 +104,7 @@ export function RunView({ runId }: { runId: string }) {
   const steps = current.known_steps ?? [];
   const done = new Set(current.completed_steps ?? []);
   const stale = current.result_stale === true;
-  const canRetry = state === "failed" || state === "cancelled";
+  const canRetry = state === "failed";
   const canCancel = state === "pending" || state === "running";
   const awaitingReview = state === "awaiting_review";
 
@@ -120,7 +123,7 @@ export function RunView({ runId }: { runId: string }) {
           </div>
         </div>
         <div className="view__actions">
-          <Button size="sm" variant="ghost" onClick={polling.refresh} busy={polling.loading}>
+          <Button size="sm" variant="ghost" onClick={() => { polling.refresh(); refreshJourney(); }} busy={polling.loading}>
             立即刷新
           </Button>
           {awaitingReview ? (
@@ -128,9 +131,9 @@ export function RunView({ runId }: { runId: string }) {
               去人工复核（{current.review_count ?? 0}）
             </a>
           ) : null}
-          {state === "succeeded" ? (
-            <a className="btn btn--primary" href={href(`/runs/${runId}/report`)}>
-              看报告
+          {journey.flow?.available.includes(5) && !journey.error ? (
+            <a className="btn btn--primary" href={journeyHref(journey.flow, 5)}>
+              下一步：报告与导出
             </a>
           ) : null}
           {canRetry ? (
@@ -271,12 +274,12 @@ export function RunView({ runId }: { runId: string }) {
               <li>failed：可带当前 revision 重试；cancelled 之后如需继续也应重新发起。</li>
             </ul>
             <div className="row gap">
-              <a className="btn btn--ghost btn--sm" href={href(`/runs/${runId}/review`)}>
+              {journey.flow?.available.includes(4) && !journey.error ? <a className="btn btn--ghost btn--sm" href={href(`/runs/${runId}/review`)}>
                 复核页
-              </a>
-              <a className="btn btn--ghost btn--sm" href={href(`/runs/${runId}/report`)}>
+              </a> : null}
+              {journey.flow?.available.includes(5) && !journey.error ? <a className="btn btn--ghost btn--sm" href={journeyHref(journey.flow, 5)}>
                 报告页
-              </a>
+              </a> : null}
               <Button
                 size="sm"
                 variant="ghost"

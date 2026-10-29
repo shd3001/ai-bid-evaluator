@@ -1,9 +1,13 @@
 import asyncio
+import logging
 from contextlib import suppress
 from dataclasses import dataclass
 from uuid import uuid4
+from ai_bid_evaluator.logging_setup import run_id_var
 from ai_bid_evaluator.domain.run import utcnow
 from ai_bid_evaluator.domain.exceptions import Conflict, DomainError
+
+logger = logging.getLogger("ai_bid_evaluator.worker")
 
 
 @dataclass
@@ -31,20 +35,27 @@ class WorkerRunner:
         state = await asyncio.to_thread(self.repository.claim_next, self.owner, self.clock(), self.lease_seconds, run_id)
         if state is None:
             return None
-        while state.status == "running" and state.owner == self.owner:
-            state = await self.execute_next_step(state.run_id)
-        return state
+        token = run_id_var.set(state.run_id)
+        logger.info("run_claimed", extra={"run_type": state.type, "owner": self.owner})
+        try:
+            while state.status == "running" and state.owner == self.owner:
+                state = await self.execute_next_step(state.run_id)
+            return state
+        finally:
+            run_id_var.reset(token)
 
     async def execute_next_step(self, run_id):
         state = await asyncio.to_thread(self.repository.load, run_id)
         if state.owner != self.owner or state.status != "running":
             raise Conflict("worker 没有有效任务租约")
         if state.cancel_requested:
+            logger.info("run_cancel_honoured")
             return await asyncio.to_thread(self.repository.finish, run_id, self.owner)
         remaining = [name for name in state.known_steps if name not in state.completed_steps]
         if not remaining:
             return await asyncio.to_thread(self.repository.finish, run_id, self.owner)
         name = remaining[0]
+        logger.info("step_started", extra={"step": name})
         stored = await asyncio.to_thread(self.repository.steps, run_id)
         outputs = {step: data["output"] for step, data in stored.items() if not data.get("stale") and data.get("confirmed")}
         versions = {"model": getattr(self.gateway, "model", "none"), "prompt": getattr(self.gateway, "prompt_version", "1"),
@@ -72,6 +83,7 @@ class WorkerRunner:
                 await pulse
             updated = await asyncio.to_thread(self.repository.checkpoint, run_id, self.owner, name, outcome.output,
                 awaiting_review=outcome.awaiting_review, input_data={"snapshot": state.input_snapshot, "outputs": outputs}, versions=versions)
+            logger.info("step_completed", extra={"step": name, "awaiting_review": outcome.awaiting_review})
             if self.artifacts:
                 await asyncio.to_thread(self.artifacts.write_json, run_id, name, outcome.output)
             if updated.cancel_requested and updated.status == "running":
@@ -81,11 +93,14 @@ class WorkerRunner:
             if self.repository.load(run_id).cancel_requested:
                 return await asyncio.to_thread(self.repository.finish, run_id, self.owner)
             # Shutdown leaves the durable lease/checkpoint for expiration recovery.
+            logger.warning("step_interrupted", extra={"step": name})
             raise
         except Conflict:
             # A superseded worker must never write into its successor's task.
+            logger.warning("step_conflict", extra={"step": name})
             return await asyncio.to_thread(self.repository.load, run_id)
         except Exception as exc:
+            logger.exception("step_failed", extra={"step": name, "code": getattr(exc, "code", "execution_failed")})
             try:
                 return await asyncio.to_thread(self.repository.fail, run_id, self.owner, getattr(exc, "code", "execution_failed"))
             except Conflict:

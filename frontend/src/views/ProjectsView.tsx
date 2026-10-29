@@ -1,5 +1,5 @@
 /** 项目台：列项目、建项目、进项目。 */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSession, useToast } from "../app/session";
 import {
   ApiError,
@@ -10,7 +10,8 @@ import { Button, CopyId, EmptyState, ErrorNotice, Panel, RunStatusChip, Skeleton
 import { Labeled, Pagination } from "../components/layout";
 import { useAsync } from "../utils/useAsync";
 import { formatRelative } from "../utils/format";
-import { href } from "../utils/router";
+import { href, navigate } from "../utils/router";
+import { rememberProject, resolveProjectFlow } from '../utils/projectFlow';
 
 const PROJECT_LIMIT = 20;
 
@@ -21,6 +22,33 @@ export function ProjectsView() {
   const [cursors, setCursors] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [saving, setSaving] = useState(false);
+  const submitting = useRef(false);
+  const [entering, setEntering] = useState<string | null>(null);
+  const entryLock = useRef(false);
+  const [entryError, setEntryError] = useState<{ id: string; error: unknown } | null>(null);
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => { mounted.current = false; };
+  }, []);
+
+  const enterProject = async (project: Project): Promise<void> => {
+    if (entryLock.current) return;
+    entryLock.current = true;
+    const origin = window.location.hash;
+    setEntering(project.project_id);
+    setEntryError(null);
+    rememberProject(project);
+    try {
+      const flow = await resolveProjectFlow(api, project.project_id);
+      if (mounted.current && window.location.hash === origin) navigate(flow.destination);
+    } catch (error) {
+      if (mounted.current) setEntryError({ id: project.project_id, error });
+    } finally {
+      entryLock.current = false;
+      if (mounted.current) setEntering(null);
+    }
+  };
 
   const list = useAsync(
     () => api.listProjects({ limit: PROJECT_LIMIT, cursor: cursors[pageIndex] ?? null }),
@@ -30,14 +58,14 @@ export function ProjectsView() {
 
   const submit = async (): Promise<void> => {
     const trimmed = name.trim();
-    if (!trimmed) return;
+    if (!trimmed || submitting.current || mode === 'demo') return;
+    submitting.current = true;
     setSaving(true);
     try {
       const created = await api.createProject(trimmed);
-      push({ tone: "success", message: `项目已创建：${created.name}`, detail: `project_id ${created.project_id}` });
-      setName("");
-      list.reload();
-      runs.reload();
+      rememberProject(created);
+      push({ tone: "success", message: '项目已创建，请上传材料', detail: created.name });
+      navigate(`/projects/${encodeURIComponent(created.project_id)}/upload`);
     } catch (error) {
       push({
         tone: "danger",
@@ -45,6 +73,7 @@ export function ProjectsView() {
         detail: error instanceof ApiError ? `code ${error.code} · request_id ${error.requestId}` : undefined,
       });
     } finally {
+      submitting.current = false;
       setSaving(false);
     }
   };
@@ -56,7 +85,7 @@ export function ProjectsView() {
           <p className="micro muted">第一步</p>
           <h1 className="view__title">项目台</h1>
           <p className="view__lead muted">
-            一个项目 = 一次评审的边界：材料、运行、复核与报告都挂在它下面。Project 的 ID 是不透明字符串，界面上只做展示与透传。
+            创建项目后上传材料，继续运行解析、人工复核与报告导出。已有项目可从当前进度继续。
           </p>
         </div>
       </header>
@@ -64,8 +93,8 @@ export function ProjectsView() {
       <div className="grid grid--aside">
         <Panel
           eyebrow="新建"
-          title="建一个项目"
-          description="只需一个名字。材料与投标人在下一步提交。"
+          title="新建评审项目"
+          description="填写项目名称，创建成功后将自动进入「上传与解析」，继续提交招标公告、招标文件和投标材料。"
           as="section"
         >
           <form
@@ -141,13 +170,15 @@ export function ProjectsView() {
         <ul className="card-list">
           {(list.data?.items ?? []).map((project: Project) => (
             <li key={project.project_id}>
-              <a className="project-card" href={href(`/projects/${project.project_id}`)}>
-                <span className="project-card__name">{project.name}</span>
+              <div className="project-card">
+                <a className="project-card__name" href={href(`/projects/${encodeURIComponent(project.project_id)}`)} onClick={() => rememberProject(project)}>{project.name}</a>
                 <span className="project-card__meta micro muted">
                   材料与运行都挂在这个项目下
                 </span>
                 <CopyId value={project.project_id} label="project_id" />
-              </a>
+                <Button variant="primary" size="sm" busy={entering === project.project_id} disabled={entering !== null} onClick={() => void enterProject(project)}>进入项目</Button>
+              </div>
+              {entryError?.id === project.project_id ? <ErrorNotice error={entryError.error} onRetry={() => void enterProject(project)} compact /> : null}
             </li>
           ))}
         </ul>

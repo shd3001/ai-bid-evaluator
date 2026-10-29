@@ -1,0 +1,95 @@
+# 单机 Docker 部署：migrate（一次性）→ api / worker → web(nginx)
+#
+#   docker compose build
+#   docker compose up -d
+#   open http://localhost:8080
+#
+# 设计约束（来自后端实现，不要改动）：
+# * 只支持单机 SQLite：api/worker/migrate 必须共用同一个 data 卷，且不要扩容多副本。
+# * api 与 worker 必须使用同一个 DATABASE_URL。
+# * 前端以相对路径 /api 访问后端，只能走同源反代（这里的 nginx）。
+# * API 没有认证，8080 仅限内网使用。
+
+name: ai-bid-evaluator
+
+x-app: &app
+  image: ai-bid-evaluator:0.2.0
+  build:
+    context: .
+    target: api
+  env_file:
+    - .env
+  environment:
+    # 容器内固定数据库位置；宿主机 data/ 不进镜像，改由命名卷持久化。
+    DATABASE_URL: sqlite:////app/data/backend.db
+    LOG_FORMAT: json
+    # 前端与 API 同源，浏览器不会发跨域请求，留空减少暴露面。
+    CORS_ORIGINS: ""
+  volumes:
+    - bid-data:/app/data
+  init: true
+  logging:
+    driver: json-file
+    options:
+      max-size: "20m"
+      max-file: "5"
+
+services:
+  # 建表/升级只做一次，api/worker 等它成功后再启动，避免两个进程同时迁移。
+  migrate:
+    <<: *app
+    restart: "no"
+    command: ["python", "-m", "alembic", "upgrade", "head"]
+
+  api:
+    <<: *app
+    restart: unless-stopped
+    command:
+      ["python", "-m", "uvicorn", "ai_bid_evaluator.api.app:create_app",
+       "--factory", "--host", "0.0.0.0", "--port", "8000",
+       "--proxy-headers", "--forwarded-allow-ips=*"]
+    ports:
+      # 只绑定本机，排查用；对外入口是 web:8080。
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/ready', timeout=2)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    stop_grace_period: 30s
+
+  worker:
+    <<: *app
+    restart: unless-stopped
+    command: ["python", "-m", "ai_bid_evaluator.worker.main"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    # 收到 SIGTERM 后取消在跑任务、保留租约再退出；给足收尾时间。
+    stop_signal: SIGTERM
+    stop_grace_period: 90s
+
+  web:
+    image: ai-bid-evaluator-web:0.2.0
+    build:
+      context: .
+      target: web
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+volumes:
+  bid-data:

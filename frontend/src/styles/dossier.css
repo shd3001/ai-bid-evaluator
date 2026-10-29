@@ -1,0 +1,662 @@
+/**
+ * 结论评审卷 · dossier
+ *
+ * 全部取值来自 .design-studio/lock.json 冻结的 a-dossier 契约（variant a-dossier.html）。
+ * 契约要点：纸色底 + 28px 周期横线；宋体标题 / 无衬线正文 / 等宽数字三分工；
+ * 圆角统一 2px，除印章内描边外无阴影；层级只靠发丝线、衬线对比与字号跳变；
+ * 朱砂 #a8322a 仅用于印章、引文左边线与失败态；无过渡、无动画。
+ * 作用域前缀 dz-，避免与既有 styles/*.css 冲突。
+ */
+
+.dz-page {
+  --dz-paper: #f6f2ea;
+  --dz-paper-2: #efe9dd;
+  --dz-card: #fffdf8;
+  --dz-ink: #191512;
+  --dz-ink-2: #4b443b;
+  --dz-ink-3: #7d7466;
+  --dz-ink-4: #a89e8e;
+  --dz-line: #dcd4c5;
+  --dz-line-2: #c8bfae;
+  --dz-seal: #a8322a;
+  --dz-seal-weak: #f3e4e0;
+  --dz-pass: #2f6b4f;
+  --dz-review: #8a6410;
+  --dz-fail: #a8322a;
+  --dz-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", SimSun, Georgia, serif;
+  --dz-sans: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  --dz-mono: "Cascadia Mono", Consolas, "SF Mono", ui-monospace, monospace;
+  --dz-r: 2px;
+
+  min-height: 100%;
+  background-color: var(--dz-paper);
+  background-image: linear-gradient(0deg, rgba(200, 191, 174, 0.1) 1px, transparent 1px);
+  background-size: 100% 28px;
+  color: var(--dz-ink);
+  font-family: var(--dz-sans);
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dz-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px 64px;
+}
+
+/* ── 封面 ─────────────────────────────────────────────── */
+.dz-cover {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  padding: 36px 0 20px;
+  border-bottom: 2px solid var(--dz-ink);
+}
+.dz-no {
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  color: var(--dz-ink-3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.dz-h1 {
+  margin: 0;
+  font-family: var(--dz-serif);
+  font-size: 38px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.dz-sub {
+  margin-top: 10px;
+  color: var(--dz-ink-2);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+.dz-sub b { font-weight: 600; }
+
+.dz-stamp {
+  flex: none;
+  font-family: var(--dz-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dz-seal);
+  border: 2px solid var(--dz-seal);
+  border-radius: var(--dz-r);
+  padding: 6px 14px;
+  transform: rotate(-3.5deg);
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  opacity: 0.9;
+  box-shadow: inset 0 0 0 1px rgba(168, 50, 42, 0.25);
+  white-space: nowrap;
+}
+
+/* ── 卷宗信息带 ───────────────────────────────────────── */
+.dz-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  border-bottom: 1px solid var(--dz-line-2);
+}
+.dz-meta > div {
+  padding: 12px 16px 12px 0;
+  border-right: 1px solid var(--dz-line);
+  min-width: 0;
+}
+.dz-meta > div:last-child { border-right: 0; }
+.dz-meta dt {
+  font-family: var(--dz-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--dz-ink-4);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.dz-meta dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--dz-ink);
+}
+.dz-meta dd.mono {
+  font-family: var(--dz-mono);
+  font-size: 12px;
+  word-break: break-all;
+}
+
+/* ── 双栏：正文 + 证据边栏 ────────────────────────────── */
+.dz-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 336px;
+  gap: 0 40px;
+  margin-top: 32px;
+}
+.dz-main { min-width: 0; padding-right: 8px; }
+
+.dz-sec {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 4px;
+  font-family: var(--dz-serif);
+  font-size: 16px;
+  font-weight: 600;
+}
+.dz-sec .dz-idx {
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  color: var(--dz-ink-4);
+  letter-spacing: 0.1em;
+}
+.dz-sec .dz-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--dz-line-2);
+  transform: translateY(-2px);
+}
+.dz-secnote {
+  margin: 0 0 18px;
+  color: var(--dz-ink-3);
+  font-size: 12.5px;
+}
+.dz-sec + .dz-sec,
+.dz-block + .dz-block { margin-top: 40px; }
+
+/* 投标人切换：等宽 + 发丝线，不抢台账的视觉层级 */
+.dz-bidders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0 0 14px;
+  border-bottom: 1px solid var(--dz-line);
+}
+.dz-bidder {
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--dz-ink-3);
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 6px 12px 6px 0;
+  margin-right: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+.dz-bidder:hover { color: var(--dz-ink); }
+.dz-bidder[data-active="true"] {
+  color: var(--dz-ink);
+  border-bottom-color: var(--dz-ink);
+}
+.dz-bidder:focus-visible {
+  outline: 2px solid var(--dz-seal);
+  outline-offset: 2px;
+}
+.dz-bidder small {
+  display: block;
+  font-size: 10px;
+  color: var(--dz-ink-4);
+}
+
+/* 台账 */
+.dz-ledger { border-top: 1px solid var(--dz-ink); }
+.dz-row {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) 92px 74px 62px;
+  align-items: baseline;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--dz-line);
+}
+.dz-row .n {
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  color: var(--dz-ink-4);
+}
+.dz-row .t {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.dz-row .t .name { font-size: 14px; }
+.dz-row .t .leader {
+  flex: 1;
+  border-bottom: 1px dotted var(--dz-line-2);
+  transform: translateY(-4px);
+}
+.dz-row .w {
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  color: var(--dz-ink-3);
+  text-align: right;
+}
+.dz-row .v {
+  font-family: var(--dz-mono);
+  font-size: 16px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.dz-row .v small { font-size: 10px; color: var(--dz-ink-4); }
+.dz-row .s {
+  text-align: right;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+}
+.dz-row[data-v="pass"] .s { color: var(--dz-pass); }
+.dz-row[data-v="review"] .s { color: var(--dz-review); }
+.dz-row[data-v="fail"] .s { color: var(--dz-fail); }
+.dz-row[data-v="review"] {
+  background: linear-gradient(90deg, rgba(138, 100, 16, 0.07), transparent 62%);
+}
+.dz-row[data-v="review"] .name::after {
+  content: " ▲";
+  font-size: 9px;
+  color: var(--dz-review);
+  vertical-align: super;
+}
+
+.dz-total {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 24px;
+  padding: 16px 0 0;
+  font-family: var(--dz-serif);
+}
+.dz-total .k { color: var(--dz-ink-3); font-size: 13px; }
+.dz-total .v {
+  font-size: 30px;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--dz-mono);
+}
+.dz-total .v span { font-size: 14px; color: var(--dz-ink-3); font-family: var(--dz-sans); }
+.dz-totalnote {
+  margin: 8px 0 0;
+  font-family: var(--dz-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--dz-ink-4);
+  text-align: right;
+}
+
+/* ── 待你决定 ─────────────────────────────────────────── */
+.dz-todo {
+  margin-top: 10px;
+  border: 1px solid var(--dz-line-2);
+  background: var(--dz-card);
+}
+.dz-todo > header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--dz-line);
+  background: var(--dz-paper-2);
+}
+.dz-todo > header b {
+  font-family: var(--dz-serif);
+  font-size: 14px;
+  font-weight: 600;
+}
+.dz-cnt {
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  color: var(--dz-review);
+  border: 1px solid var(--dz-review);
+  border-radius: var(--dz-r);
+  padding: 1px 6px;
+}
+.dz-cnt[data-tone="clear"] {
+  color: var(--dz-pass);
+  border-color: var(--dz-pass);
+}
+.dz-todo ol {
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  counter-reset: dz-t;
+}
+.dz-todo li {
+  counter-increment: dz-t;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 128px;
+  align-items: baseline;
+  padding: 10px 16px;
+  border-bottom: 1px dotted var(--dz-line);
+}
+.dz-todo li:last-child { border-bottom: 0; }
+.dz-todo li::before {
+  content: counter(dz-t, decimal-leading-zero);
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  color: var(--dz-ink-4);
+}
+.dz-why { color: var(--dz-ink-2); font-size: 13px; min-width: 0; }
+.dz-why em {
+  font-style: normal;
+  color: var(--dz-review);
+  border-bottom: 1px solid var(--dz-review);
+}
+.dz-why small {
+  display: block;
+  font-family: var(--dz-mono);
+  font-size: 10.5px;
+  color: var(--dz-ink-4);
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+.dz-todo li[data-active="true"] { background: rgba(138, 100, 16, 0.05); }
+.dz-act {
+  text-align: right;
+  font-size: 12px;
+  color: var(--dz-ink-3);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--dz-sans);
+}
+.dz-act:hover { color: var(--dz-ink); }
+.dz-act:focus-visible {
+  outline: 2px solid var(--dz-seal);
+  outline-offset: 3px;
+}
+.dz-act u { text-decoration: none; border-bottom: 1px solid var(--dz-ink-3); }
+
+/* 决定表单：贴在待办区下方，仍是卷宗的一部分 */
+.dz-form {
+  border-top: 1px solid var(--dz-line);
+  padding: 14px 16px 16px;
+  background: var(--dz-paper-2);
+}
+.dz-form label { display: block; }
+.dz-reason {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  font-family: var(--dz-sans);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--dz-ink);
+  background: var(--dz-card);
+  border: 1px solid var(--dz-line-2);
+  border-radius: var(--dz-r);
+  resize: vertical;
+}
+.dz-reason:focus-visible {
+  outline: 2px solid var(--dz-seal);
+  outline-offset: -1px;
+}
+.dz-reason::placeholder { color: var(--dz-ink-4); }
+.dz-reason[disabled] { opacity: 0.5; }
+.dz-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+.dz-btn {
+  font-family: var(--dz-sans);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 8px 20px;
+  border: 1px solid var(--dz-ink);
+  border-radius: var(--dz-r);
+  background: var(--dz-ink);
+  color: var(--dz-paper);
+  cursor: pointer;
+}
+.dz-btn.ghost {
+  background: transparent;
+  color: var(--dz-ink);
+  border-color: var(--dz-line-2);
+}
+.dz-btn.ghost:hover { border-color: var(--dz-ink); }
+.dz-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.dz-btn:focus-visible {
+  outline: 2px solid var(--dz-seal);
+  outline-offset: 2px;
+}
+
+.dz-hint {
+  display: block;
+  margin: 8px 0 0;
+  font-family: var(--dz-mono);
+  font-size: 10.5px;
+  line-height: 1.75;
+  letter-spacing: 0.06em;
+  color: var(--dz-ink-3);
+}
+.dz-hint[data-tone="error"] { color: var(--dz-fail); }
+/* 资格状态：三态只在后端给出 status 时着色 */
+.dz-status[data-v="pass"] { color: var(--dz-pass); }
+.dz-status[data-v="review"] { color: var(--dz-review); }
+.dz-status[data-v="fail"] { color: var(--dz-fail); }
+
+/* 空态：与选中态互斥（有选中项时不渲染空态） */
+.dz-empty {
+  margin-top: 10px;
+  border: 1px dashed var(--dz-line-2);
+  padding: 22px 18px;
+  text-align: center;
+  color: var(--dz-ink-3);
+  font-family: var(--dz-serif);
+  font-size: 13.5px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.dz-empty span {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--dz-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: var(--dz-ink-4);
+  text-transform: uppercase;
+}
+
+/* ── 证据边栏 ─────────────────────────────────────────── */
+.dz-rail { position: relative; min-width: 0; }
+.dz-rail::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: repeating-linear-gradient(180deg, var(--dz-line-2) 0 4px, transparent 4px 8px);
+}
+.dz-rail h3 {
+  margin: 0 0 10px;
+  font-family: var(--dz-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--dz-ink-4);
+  text-transform: uppercase;
+}
+.dz-ev {
+  border: 1px solid var(--dz-line);
+  background: var(--dz-card);
+  margin-bottom: 12px;
+}
+.dz-ev > .hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--dz-line);
+  background: var(--dz-paper-2);
+}
+.dz-ev .id {
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  color: var(--dz-ink-2);
+}
+.dz-ev .lock {
+  font-family: var(--dz-mono);
+  font-size: 10px;
+  color: var(--dz-ink-4);
+}
+.dz-ev .bd { padding: 10px; }
+.dz-ev dl {
+  margin: 0 0 10px;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 2px 8px;
+}
+.dz-ev dt {
+  font-family: var(--dz-mono);
+  font-size: 10px;
+  color: var(--dz-ink-4);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-top: 1px;
+}
+.dz-ev dd {
+  margin: 0;
+  font-family: var(--dz-mono);
+  font-size: 11px;
+  color: var(--dz-ink-2);
+  word-break: break-all;
+  min-width: 0;
+}
+.dz-page blockquote {
+  margin: 0;
+  padding: 8px 10px 8px 12px;
+  border-left: 2px solid var(--dz-seal);
+  background: var(--dz-seal-weak);
+  font-family: var(--dz-serif);
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--dz-ink);
+}
+.dz-page blockquote cite {
+  display: block;
+  margin-top: 6px;
+  font-style: normal;
+  font-family: var(--dz-mono);
+  font-size: 10px;
+  color: var(--dz-ink-3);
+  letter-spacing: 0.04em;
+}
+.dz-chain {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--dz-line);
+  font-family: var(--dz-mono);
+  font-size: 10px;
+  line-height: 1.9;
+  color: var(--dz-ink-3);
+}
+.dz-chain b { color: var(--dz-pass); font-weight: 400; }
+
+/* ── 原始结果折叠 / 出口 / 页脚 ────────────────────────── */
+.dz-fold {
+  margin-top: 40px;
+  border-top: 1px solid var(--dz-line);
+  padding-top: 14px;
+}
+.dz-fold > summary {
+  font-family: var(--dz-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dz-ink-3);
+  cursor: pointer;
+}
+.dz-raw {
+  margin: 14px 0 0;
+  max-height: 420px;
+  overflow: auto;
+  font-family: var(--dz-mono);
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--dz-ink-2);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.dz-link {
+  font: inherit;
+  color: var(--dz-ink);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--dz-line-2);
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+.dz-link:hover { border-bottom-color: var(--dz-ink); }
+.dz-link:focus-visible {
+  outline: 2px solid var(--dz-seal);
+  outline-offset: 2px;
+}
+.dz-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.dz-tools a {
+  padding: 7px 12px;
+  border: 1px solid var(--dz-line-2);
+  border-radius: var(--dz-r);
+  font-family: var(--dz-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dz-ink-2);
+  text-decoration: none;
+}
+.dz-tools a:hover { border-color: var(--dz-ink); color: var(--dz-ink); }
+.dz-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 44px;
+  padding-top: 14px;
+  border-top: 1px solid var(--dz-ink);
+  font-family: var(--dz-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--dz-ink-4);
+}
+
+/* ── 响应式：1080px 证据边栏下置，760px 单列 ───────────── */
+@media (max-width: 1080px) {
+  .dz-body { grid-template-columns: minmax(0, 1fr); }
+  .dz-main { padding-right: 0; }
+  .dz-rail { margin-top: 40px; }
+  .dz-rail::before { display: none; }
+  .dz-meta { grid-template-columns: repeat(2, 1fr); }
+  .dz-meta > div:nth-child(2n) { border-right: 0; }
+  .dz-meta > div:nth-child(-n + 2) { border-bottom: 1px solid var(--dz-line); }
+}
+@media (max-width: 760px) {
+  .dz-wrap { padding: 0 20px 48px; }
+  .dz-cover { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .dz-h1 { font-size: 26px; }
+  .dz-stamp { font-size: 17px; padding: 5px 10px; }
+  .dz-meta { grid-template-columns: minmax(0, 1fr); }
+  .dz-meta > div { border-right: 0; border-bottom: 1px solid var(--dz-line); }
+  .dz-row { grid-template-columns: 22px minmax(0, 1fr) 62px; }
+  .dz-row .w,
+  .dz-row .v small { display: none; }
+  .dz-todo li { grid-template-columns: 28px minmax(0, 1fr); }
+  .dz-act { grid-column: 2; text-align: left; margin-top: 6px; }
+  .dz-foot { flex-direction: column; gap: 6px; }
+}
+
+/* 动效契约：none。仍需尊重系统偏好，禁止任何过渡。 */
+@media (prefers-reduced-motion: reduce) {
+  .dz-page *,
+  .dz-page *::before,
+  .dz-page *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
